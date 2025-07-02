@@ -21,8 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
         data.push([empId, date, work]);
       });
 
-      // Send to Google Sheets (we'll set this up soon)
-      fetch('https://script.google.com/macros/s/PASTE-YOUR-URL-HERE/exec', {
+      // Choose sheet name based on form ID
+      const sheetName = form.id === "dailyForm" ? "DailyReports" : "WeeklyPlans";
+
+      fetch(`https://script.google.com/macros/u/1/s/AKfycbwrn-9y-N8P14uqBk_0g9uF_yWj9MYdQVYsqZrs8sfGIlWZPqQAeAYBXvau-gjzFNs0pw/exec?sheet=${sheetName}`, {
         method: 'POST',
         mode: 'no-cors',
         body: JSON.stringify(data)
