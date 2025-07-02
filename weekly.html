@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Weekly Plan</title>
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <h2>Submit Weekly Plan</h2>
-  <form id="weeklyForm">
-    <div class="day-entry">
-      <input type="text" name="employeeId" placeholder="Employee ID" required>
-      <input type="date" name="date" required>
-      <input type="text" name="plan" placeholder="Week Plan" required>
-    </div>
-    <button type="button" onclick="addEntry('weeklyForm')">Add Day</button>
-    <button type="submit">Submit</button>
-  </form>
-  <form id="weeklyForm">
+<form id="weeklyForm">
   <div class="entry-section">
     <input type="text" class="emp-id" placeholder="Employee ID" />
     <input type="date" class="entry-date" />
@@ -24,10 +7,6 @@
   <button type="button" onclick="addEntry('weeklyForm')">Add Day</button>
   <button type="button" onclick="submitForm('WeeklyPlans', 'weeklyForm')">Submit</button>
 </form>
-
-<!-- Include the shared script file -->
 <script src="script.js"></script>
-</body>
-</html>
 </body>
 </html>
