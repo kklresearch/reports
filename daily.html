@@ -15,5 +15,14 @@
     <button type="button" onclick="addEntry('dailyForm')">Add Day</button>
     <button type="submit">Submit</button>
   </form>
+  <form id="dailyForm">
+  <div class="entry-section">
+    <input type="text" class="emp-id" placeholder="Employee ID" />
+    <input type="date" class="entry-date" />
+    <textarea class="entry-text" placeholder="Work done"></textarea>
+  </div>
+  <button type="button" onclick="addEntry('dailyForm')">Add Day</button>
+  <button type="button" onclick="submitForm('DailyReports', 'dailyForm')">Submit</button>
+</form>
 </body>
 </html>
