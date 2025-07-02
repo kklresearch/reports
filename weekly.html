@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weekly Plan</title>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h2>Submit Weekly Plan</h2>
+  <form id="weeklyForm">
+    <div class="day-entry">
+      <input type="text" name="employeeId" placeholder="Employee ID" required>
+      <input type="date" name="date" required>
+      <input type="text" name="plan" placeholder="Week Plan" required>
+    </div>
+    <button type="button" onclick="addEntry('weeklyForm')">Add Day</button>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

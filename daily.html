@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Daily Report</title>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h2>Submit Daily Report</h2>
+  <form id="dailyForm">
+    <div class="day-entry">
+      <input type="text" name="employeeId" placeholder="Employee ID" required>
+      <input type="date" name="date" required>
+      <input type="text" name="workDone" placeholder="Work Done" required>
+    </div>
+    <button type="button" onclick="addEntry('dailyForm')">Add Day</button>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
