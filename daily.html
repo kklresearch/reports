@@ -53,18 +53,31 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      margin-bottom: 1.5rem;
     }
 
-    .submit-btn {
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .add-btn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .submit-btn {
       background-color: #28a745;
       color: white;
-      transition: background-color 0.3s;
-      margin-top: 1rem;
     }
 
     footer {
@@ -90,7 +103,10 @@
       <textarea class="entry-text" placeholder="Work done" required></textarea>
     </div>
 
-    <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
+    <div class="form-buttons">
+      <button type="button" class="add-btn" onclick="addEntry()">Add Another Day</button>
+      <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
+    </div>
   </form>
 
   <footer>
@@ -99,6 +115,19 @@
 
   <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbydf2nWMybXOOpNeyA2ggBZHgCzga5G4L-zH8joRW86ZkMWOWTrpXyogHGH2dHSJNDu/exec';
+
+    function addEntry() {
+      const section = document.createElement('div');
+      section.className = 'entry-section';
+
+      section.innerHTML = `
+        <input type="text" class="emp-id" placeholder="Employee ID" required />
+        <input type="date" class="entry-date" required />
+        <textarea class="entry-text" placeholder="Work done" required></textarea>
+      `;
+
+      document.getElementById('dailyForm').insertBefore(section, document.querySelector('.form-buttons'));
+    }
 
     function submitForm() {
       const sections = document.querySelectorAll('.entry-section');
