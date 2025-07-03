@@ -49,12 +49,6 @@
       min-height: 100px;
     }
 
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
     button {
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
@@ -62,16 +56,9 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s;
-    }
-
-    .submit-btn {
       background-color: #28a745;
       color: white;
-    }
-
-    .reset-btn {
-      background-color: #dc3545;
-      color: white;
+      margin-top: 1rem;
     }
 
     footer {
@@ -95,10 +82,7 @@
     <input type="date" id="entryDate" required />
     <textarea id="workDone" placeholder="Work done" required></textarea>
 
-    <div class="buttons">
-      <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
-      <button type="button" class="reset-btn" onclick="resetForm()">Reset</button>
-    </div>
+    <button type="button" onclick="submitForm()">Submit</button>
   </form>
 
   <footer>
@@ -122,7 +106,7 @@
       formData.append('EmployeeID', empId);
       formData.append('Date', date);
       formData.append('WorkDone', work);
-      formData.append('sheet', 'DailyReports'); // ✅ This must match the tab name exactly
+      formData.append('sheet', 'DailyReports');
 
       fetch(scriptURL, {
         method: 'POST',
@@ -130,24 +114,18 @@
       })
       .then(response => response.text())
       .then(text => {
-        console.log('Response from script:', text);
+        console.log('Response:', text);
         if (text.toLowerCase().includes('success') || text.includes('Web App')) {
           alert('Submitted successfully!');
-          resetForm();
+          document.getElementById('dailyForm').reset();
         } else {
-          alert('Form submitted, but no confirmation from server. Check sheet/tab name.');
+          alert('Form submitted, but no confirmation from server. Please check the sheet.');
         }
       })
       .catch(error => {
         console.error('Submission error:', error);
         alert('Something went wrong. Please try again later.');
       });
-    }
-
-    function resetForm() {
-      document.getElementById('empId').value = '';
-      document.getElementById('entryDate').value = '';
-      document.getElementById('workDone').value = '';
     }
   </script>
 
