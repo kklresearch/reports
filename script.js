@@ -1,7 +1,7 @@
-// ✅ Your working Apps Script endpoint
-const endpoint = "https://script.google.com/macros/s/AKfycbw7k0VQEZWMP5i3IZlMwlI7QpVClawl7U9mDPvKOaFlA3dpr7IHVnI7J7RhdzZgRDy7/exec";
+// ✅ Replace with your actual deployed Apps Script URL
+const endpoint = "https://script.google.com/macros/s/AKfycbydf2nWMybXOOpNeyA2ggBZHgCzga5G4L-zH8joRW86ZkMWOWTrpXyogHGH2dHSJNDu/exec";
 
-// ✅ Submit form data to Google Sheets
+// ✅ Function to submit form data to Google Sheets
 function submitForm(sheetName, formId) {
   const form = document.getElementById(formId);
   const rows = [];
@@ -26,13 +26,17 @@ function submitForm(sheetName, formId) {
     method: "POST",
     body: JSON.stringify(rows),
     headers: {
-      "Content-Type": "text/plain" // 👈 Using text/plain avoids CORS preflight
+      "Content-Type": "text/plain"  // ✅ Avoids CORS preflight issues
     }
   })
     .then(res => res.text())
     .then(msg => {
-      alert(msg === "Success" ? "Submitted successfully!" : msg);
-      form.reset();
+      if (msg === "Success") {
+        alert("Submitted successfully!");
+        form.reset();
+      } else {
+        alert("Error: " + msg);
+      }
     })
     .catch(err => {
       console.error("Fetch error:", err);
@@ -40,13 +44,13 @@ function submitForm(sheetName, formId) {
     });
 }
 
-// ✅ Add a new row of entry fields
+// ✅ Function to add a new entry row
 function addEntry(formId) {
   const form = document.getElementById(formId);
   const section = form.querySelector(".entry-section");
   const clone = section.cloneNode(true);
 
-  // Clear values in the cloned inputs
+  // Clear the inputs in the cloned section
   clone.querySelectorAll("input, textarea").forEach(input => (input.value = ""));
   form.insertBefore(clone, form.querySelector("button[type='button']"));
 }
