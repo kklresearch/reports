@@ -8,172 +8,71 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #83a4d4, #b6fbff);
+      background: #f0f8ff;
       margin: 0;
-      padding: 2rem 1rem 4rem;
+      padding: 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
     }
 
-    h1 {
-      color: #004466;
-      margin-bottom: 2rem;
-      text-align: center;
+    h2 {
+      color: #2a5d84;
+      margin-bottom: 1rem;
     }
 
     form {
-      background-color: #ffffffcc;
+      background: white;
       padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       width: 100%;
-      max-width: 500px;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    input, textarea {
-      font-family: inherit;
-      padding: 0.75rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      width: 100%;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
+      max-width: 600px;
     }
 
     .entry-section {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
-    .form-buttons {
-      display: flex;
-      justify-content: space-between;
+    input, textarea {
+      font-family: inherit;
+      margin-bottom: 0.8rem;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
     }
 
     button {
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
+      background-color: #2a5d84;
+      color: white;
       border: none;
-      border-radius: 5px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      margin-right: 1rem;
+      margin-top: 0.5rem;
     }
 
-    .add-btn {
-      background-color: #007bff;
-      color: white;
-    }
-
-    .submit-btn {
-      background-color: #28a745;
-      color: white;
-    }
-
-    footer {
-      font-size: 0.75rem;
-      color: #555;
-      background-color: transparent;
-      text-align: center;
-      margin-top: auto;
-      padding: 1rem 2rem 0;
-      width: 100%;
-      max-width: 700px;
+    button:hover {
+      background-color: #1e4a6a;
     }
   </style>
 </head>
 <body>
-
-  <h1>Submit Daily Report</h1>
-
+  <h2>Submit Daily Report</h2>
   <form id="dailyForm">
     <div class="entry-section">
       <input type="text" class="emp-id" placeholder="Employee ID" required />
       <input type="date" class="entry-date" required />
-      <textarea class="entry-text" placeholder="Work done" required></textarea>
+      <textarea class="entry-text" placeholder="Work done" rows="3" required></textarea>
     </div>
-
-    <div class="form-buttons">
-      <button type="button" class="add-btn" onclick="addEntry()">Add Another Day</button>
-      <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
-    </div>
+    <button type="button" onclick="addEntry('dailyForm')">+ Add Another Day</button>
+    <button type="button" onclick="submitForm('DailyReports', 'dailyForm')">✅ Submit</button>
   </form>
-
-  <footer>
-    <strong>Disclaimer:</strong> This portal is for employees of the Seeds Department of KisanKraft Limited to submit daily work done reports and weekly plans. Submitted data is linked to your Employee ID and stored securely and may be used for internal purposes. Entries once made, cannot be edited through the portal.
-  </footer>
-
-  <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbydf2nWMybXOOpNeyA2ggBZHgCzga5G4L-zH8joRW86ZkMWOWTrpXyogHGH2dHSJNDu/exec';
-
-    function addEntry() {
-      const section = document.createElement('div');
-      section.className = 'entry-section';
-
-      section.innerHTML = `
-        <input type="text" class="emp-id" placeholder="Employee ID" required />
-        <input type="date" class="entry-date" required />
-        <textarea class="entry-text" placeholder="Work done" required></textarea>
-      `;
-
-      document.getElementById('dailyForm').insertBefore(section, document.querySelector('.form-buttons'));
-    }
-
-    function submitForm() {
-      const sections = document.querySelectorAll('.entry-section');
-      const entries = [];
-
-      for (const section of sections) {
-        const empId = section.querySelector('.emp-id').value.trim();
-        const date = section.querySelector('.entry-date').value;
-        const work = section.querySelector('.entry-text').value.trim();
-
-        if (!empId || !date || !work) {
-          alert('Please fill out all fields.');
-          return;
-        }
-
-        entries.push({ empId, date, work });
-      }
-
-      for (const entry of entries) {
-        const formData = new FormData();
-        formData.append('EmployeeID', entry.empId);
-        formData.append('Date', entry.date);
-        formData.append('WorkDone', entry.work);
-        formData.append('sheet', 'DailyReports');
-
-        fetch(scriptURL, {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.text())
-        .then(text => {
-          console.log('Response from script:', text);
-          if (text.toLowerCase().includes('success') || text.includes('Web App')) {
-            alert('Submitted successfully!');
-            document.getElementById('dailyForm').reset();
-          } else {
-            alert('Form submitted, but no confirmation from server.');
-          }
-        })
-        .catch(error => {
-          console.error('Submission error:', error);
-          alert('Something went wrong. Please try again later.');
-        });
-      }
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
