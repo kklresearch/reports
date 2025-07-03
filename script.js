@@ -2,19 +2,29 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbydf2nWMybXOOpNeyA2gg
 
 function submitForm(sheetName, formId) {
   const form = document.getElementById(formId);
-  const empId = form.querySelector('.emp-id').value.trim();
-  const date = form.querySelector('.entry-date').value;
-  const work = form.querySelector('.entry-text').value.trim();
+  const entries = form.querySelectorAll('.entry-section');
 
-  if (!empId || !date || !work) {
-    showModal("Error", "All fields are required. Click OK to return to the form.");
+  let hasData = false;
+  let formData = new FormData();
+
+  entries.forEach((entry, index) => {
+    const empId = entry.querySelector('.emp-id').value.trim();
+    const date = entry.querySelector('.entry-date').value;
+    const text = entry.querySelector('.entry-text').value.trim();
+
+    if (empId && date && text) {
+      hasData = true;
+      formData.append(`EmployeeID_${index}`, empId);
+      formData.append(`Date_${index}`, date);
+      formData.append(`WorkDone_${index}`, text);
+    }
+  });
+
+  if (!hasData) {
+    showModal("Error", "Please fill out at least one complete row. Click OK to return.");
     return;
   }
 
-  const formData = new FormData();
-  formData.append('EmployeeID', empId);
-  formData.append('Date', date);
-  formData.append('WorkDone', work);
   formData.append('sheet', sheetName);
 
   fetch(scriptURL, {
@@ -33,13 +43,44 @@ function submitForm(sheetName, formId) {
     });
 }
 
+// Function to show the modal popup
 function showModal(title, message) {
   document.getElementById('modalTitle').textContent = title;
   document.querySelector('#resultModal p').textContent = message;
   document.getElementById('resultModal').style.display = 'flex';
 }
 
+// Close modal and reload the current page
 function closeModal() {
   document.getElementById('resultModal').style.display = 'none';
-  window.location.href = 'daily.html';
+  window.location.reload();  // Reloads current page
+}
+
+// Used in weekly.html: adds another day/row
+function addEntry(formId) {
+  const form = document.getElementById(formId);
+  const firstEntry = form.querySelector('.entry-section');
+  const newEntry = firstEntry.cloneNode(true);
+
+  // Clear previous input values
+  newEntry.querySelector('.emp-id').value = '';
+  newEntry.querySelector('.entry-date').value = '';
+  newEntry.querySelector('.entry-text').value = '';
+
+  // Remove any existing remove button (avoid duplicates)
+  const existingRemoveBtn = newEntry.querySelector('.remove-btn');
+  if (existingRemoveBtn) existingRemoveBtn.remove();
+
+  // Create and add new remove button
+  const removeBtn = document.createElement('button');
+  removeBtn.textContent = '×';
+  removeBtn.className = 'remove-btn';
+  removeBtn.type = 'button';
+  removeBtn.onclick = () => newEntry.remove();
+
+  newEntry.appendChild(removeBtn);
+
+  // Insert the new entry before the button row
+  const buttonRow = form.querySelector('.button-row');
+  form.insertBefore(newEntry, buttonRow);
 }
