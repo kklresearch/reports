@@ -34,6 +34,11 @@
       font-weight: 600;
     }
 
+    .entry-section {
+      display: flex;
+      flex-direction: column;
+    }
+
     input, textarea {
       width: 100%;
       padding: 0.9rem;
@@ -89,9 +94,11 @@
   <div class="container">
     <h2>Submit Daily Report</h2>
     <form id="dailyForm">
-      <input type="text" class="emp-id" placeholder="Employee ID" required />
-      <input type="date" class="entry-date" required />
-      <textarea class="entry-text" placeholder="Work done" required></textarea>
+      <div class="entry-section">
+        <input type="text" class="emp-id" placeholder="Employee ID" required />
+        <input type="date" class="entry-date" required />
+        <textarea class="entry-text" placeholder="Work done" required></textarea>
+      </div>
       <button type="button" class="submit-btn" onclick="submitForm('DailyReports', 'dailyForm')">Submit</button>
     </form>
     <div class="note">
