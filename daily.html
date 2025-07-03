@@ -10,12 +10,12 @@
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(to right, #83a4d4, #b6fbff);
       margin: 0;
-      padding: 2rem;
+      padding: 2rem 1rem 4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
+      box-sizing: border-box;
     }
 
     h1 {
@@ -74,11 +74,23 @@
       background-color: #dc3545;
       color: white;
     }
+
+    footer {
+      font-size: 0.75rem;
+      color: #555;
+      background-color: transparent;
+      text-align: center;
+      margin-top: auto;
+      padding: 1rem 2rem 0;
+      width: 100%;
+      max-width: 700px;
+    }
   </style>
 </head>
 <body>
 
   <h1>Submit Daily Report</h1>
+
   <form id="dailyForm">
     <input type="text" id="empId" placeholder="Employee ID" required>
     <input type="date" id="entryDate" required>
@@ -89,6 +101,10 @@
       <button type="button" class="reset-btn" onclick="resetForm()">Reset</button>
     </div>
   </form>
+
+  <footer>
+    <strong>Disclaimer:</strong> This portal is for employees of the Seeds Department of KisanKraft Limited to submit daily work done reports and weekly plans. Submitted data is linked to your Employee ID and stored securely and may be used for internal purposes. Entries once made, cannot be edited through the portal.
+  </footer>
 
   <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbydf2nWMybXOOpNeyA2ggBZHgCzga5G4L-zH8joRW86ZkMWOWTrpXyogHGH2dHSJNDu/exec';
