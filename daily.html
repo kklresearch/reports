@@ -49,15 +49,21 @@
       min-height: 100px;
     }
 
-    button {
+    .entry-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .submit-btn {
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.3s;
       background-color: #28a745;
       color: white;
+      transition: background-color 0.3s;
       margin-top: 1rem;
     }
 
@@ -78,11 +84,13 @@
   <h1>Submit Daily Report</h1>
 
   <form id="dailyForm">
-    <input type="text" id="empId" placeholder="Employee ID" required />
-    <input type="date" id="entryDate" required />
-    <textarea id="workDone" placeholder="Work done" required></textarea>
+    <div class="entry-section">
+      <input type="text" class="emp-id" placeholder="Employee ID" required />
+      <input type="date" class="entry-date" required />
+      <textarea class="entry-text" placeholder="Work done" required></textarea>
+    </div>
 
-    <button type="button" onclick="submitForm()">Submit</button>
+    <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
   </form>
 
   <footer>
@@ -93,39 +101,48 @@
     const scriptURL = 'https://script.google.com/macros/s/AKfycbydf2nWMybXOOpNeyA2ggBZHgCzga5G4L-zH8joRW86ZkMWOWTrpXyogHGH2dHSJNDu/exec';
 
     function submitForm() {
-      const empId = document.getElementById('empId').value.trim();
-      const date = document.getElementById('entryDate').value;
-      const work = document.getElementById('workDone').value.trim();
+      const sections = document.querySelectorAll('.entry-section');
+      const entries = [];
 
-      if (!empId || !date || !work) {
-        alert('Please fill out all fields.');
-        return;
+      for (const section of sections) {
+        const empId = section.querySelector('.emp-id').value.trim();
+        const date = section.querySelector('.entry-date').value;
+        const work = section.querySelector('.entry-text').value.trim();
+
+        if (!empId || !date || !work) {
+          alert('Please fill out all fields.');
+          return;
+        }
+
+        entries.push({ empId, date, work });
       }
 
-      const formData = new FormData();
-      formData.append('EmployeeID', empId);
-      formData.append('Date', date);
-      formData.append('WorkDone', work);
-      formData.append('sheet', 'DailyReports');
+      for (const entry of entries) {
+        const formData = new FormData();
+        formData.append('EmployeeID', entry.empId);
+        formData.append('Date', entry.date);
+        formData.append('WorkDone', entry.work);
+        formData.append('sheet', 'DailyReports');
 
-      fetch(scriptURL, {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.text())
-      .then(text => {
-        console.log('Response:', text);
-        if (text.toLowerCase().includes('success') || text.includes('Web App')) {
-          alert('Submitted successfully!');
-          document.getElementById('dailyForm').reset();
-        } else {
-          alert('Form submitted, but no confirmation from server. Please check the sheet.');
-        }
-      })
-      .catch(error => {
-        console.error('Submission error:', error);
-        alert('Something went wrong. Please try again later.');
-      });
+        fetch(scriptURL, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.text())
+        .then(text => {
+          console.log('Response from script:', text);
+          if (text.toLowerCase().includes('success') || text.includes('Web App')) {
+            alert('Submitted successfully!');
+            document.getElementById('dailyForm').reset();
+          } else {
+            alert('Form submitted, but no confirmation from server.');
+          }
+        })
+        .catch(error => {
+          console.error('Submission error:', error);
+          alert('Something went wrong. Please try again later.');
+        });
+      }
     }
   </script>
 
