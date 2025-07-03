@@ -4,7 +4,7 @@ function submitForm(sheetName, formId) {
   const form = document.getElementById(formId);
   const entries = form.querySelectorAll('.entry-section');
 
-  let hasData = false;
+  let hasValidRow = false;
   let formData = new FormData();
 
   entries.forEach((entry, index) => {
@@ -12,16 +12,17 @@ function submitForm(sheetName, formId) {
     const date = entry.querySelector('.entry-date').value;
     const text = entry.querySelector('.entry-text').value.trim();
 
+    // If all 3 fields are filled, consider this a valid row
     if (empId && date && text) {
-      hasData = true;
+      hasValidRow = true;
       formData.append(`EmployeeID_${index}`, empId);
       formData.append(`Date_${index}`, date);
       formData.append(`WorkDone_${index}`, text);
     }
   });
 
-  if (!hasData) {
-    showModal("Error", "Please fill out at least one complete row. Click OK to return.");
+  if (!hasValidRow) {
+    showModal("Error", "Please fill out at least one complete row before submitting.");
     return;
   }
 
@@ -35,7 +36,6 @@ function submitForm(sheetName, formId) {
     .then(responseText => {
       console.log(responseText);
       showModal("Submitted", "Click OK to return to the reporting page.");
-      form.reset();
     })
     .catch(error => {
       console.error('Error!', error.message);
@@ -43,44 +43,45 @@ function submitForm(sheetName, formId) {
     });
 }
 
-// Function to show the modal popup
 function showModal(title, message) {
   document.getElementById('modalTitle').textContent = title;
   document.querySelector('#resultModal p').textContent = message;
   document.getElementById('resultModal').style.display = 'flex';
 }
 
-// Close modal and reload the current page
 function closeModal() {
   document.getElementById('resultModal').style.display = 'none';
-  window.location.reload();  // Reloads current page
+  window.location.reload();  // reloads the form
 }
 
-// Used in weekly.html: adds another day/row
 function addEntry(formId) {
   const form = document.getElementById(formId);
   const firstEntry = form.querySelector('.entry-section');
   const newEntry = firstEntry.cloneNode(true);
 
-  // Clear previous input values
   newEntry.querySelector('.emp-id').value = '';
   newEntry.querySelector('.entry-date').value = '';
   newEntry.querySelector('.entry-text').value = '';
 
-  // Remove any existing remove button (avoid duplicates)
   const existingRemoveBtn = newEntry.querySelector('.remove-btn');
   if (existingRemoveBtn) existingRemoveBtn.remove();
 
-  // Create and add new remove button
+  // Styled "Remove" button
   const removeBtn = document.createElement('button');
-  removeBtn.textContent = '×';
+  removeBtn.textContent = 'Remove';
   removeBtn.className = 'remove-btn';
   removeBtn.type = 'button';
+  removeBtn.style.marginTop = '0.5rem';
+  removeBtn.style.backgroundColor = '#ff5555';
+  removeBtn.style.color = 'white';
+  removeBtn.style.border = 'none';
+  removeBtn.style.padding = '0.5rem 1rem';
+  removeBtn.style.borderRadius = '6px';
+  removeBtn.style.cursor = 'pointer';
   removeBtn.onclick = () => newEntry.remove();
 
   newEntry.appendChild(removeBtn);
 
-  // Insert the new entry before the button row
   const buttonRow = form.querySelector('.button-row');
   form.insertBefore(newEntry, buttonRow);
 }
