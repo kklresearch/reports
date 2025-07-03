@@ -1,11 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Employee Portal</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work Reports</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #83a4d4, #b6fbff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+
+    .button {
+      background-color: #ffffffcc;
+      color: #333;
+      border: none;
+      padding: 1rem 2rem;
+      margin: 1rem;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Employee Report Portal</h1>
-  <button onclick="window.location.href='daily.html'">Click here to submit daily reports</button>
-  <button onclick="window.location.href='weekly.html'">Click here to submit weekly plan</button>
+  <h1>KKL Daily & Weekly Reports</h1>
+  <button class="button" onclick="location.href='daily.html'">📅 Submit Daily Report</button>
+  <button class="button" onclick="location.href='weekly.html'">📝 Submit Weekly Plan</button>
 </body>
 </html>
