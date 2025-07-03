@@ -1,153 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Submit Daily Report</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #83a4d4, #b6fbff);
-      margin: 0;
-      padding: 2rem 1rem 4rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      box-sizing: border-box;
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbydf2nWMybXOOpNeyA2ggBZHgCzga5G4L-zH8joRW86ZkMWOWTrpXyogHGH2dHSJNDu/exec';
+
+  function submitForm() {
+    const empId = document.getElementById('empId').value.trim();
+    const date = document.getElementById('entryDate').value;
+    const work = document.getElementById('workDone').value.trim();
+
+    if (!empId || !date || !work) {
+      alert('Please fill out all fields.');
+      return;
     }
 
-    h1 {
-      color: #004466;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
+    const formData = new FormData();
+    formData.append('EmployeeID', empId);
+    formData.append('Date', date);
+    formData.append('WorkDone', work);
+    formData.append('sheet', 'DailyReports'); // Make sure tab name in Sheet is exactly this
 
-    form {
-      background-color: #ffffffcc;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    input, textarea {
-      font-family: inherit;
-      padding: 0.75rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      width: 100%;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    button {
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .submit-btn {
-      background-color: #28a745;
-      color: white;
-    }
-
-    .reset-btn {
-      background-color: #dc3545;
-      color: white;
-    }
-
-    footer {
-      font-size: 0.75rem;
-      color: #555;
-      background-color: transparent;
-      text-align: center;
-      margin-top: auto;
-      padding: 1rem 2rem 0;
-      width: 100%;
-      max-width: 700px;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>Submit Daily Report</h1>
-
-  <form id="dailyForm">
-    <input type="text" id="empId" placeholder="Employee ID" required>
-    <input type="date" id="entryDate" required>
-    <textarea id="workDone" placeholder="Work done" required></textarea>
-
-    <div class="buttons">
-      <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
-      <button type="button" class="reset-btn" onclick="resetForm()">Reset</button>
-    </div>
-  </form>
-
-  <footer>
-    <strong>Disclaimer:</strong> This portal is for employees of the Seeds Department of KisanKraft Limited to submit daily work done reports and weekly plans. Submitted data is linked to your Employee ID and stored securely and may be used for internal purposes. Entries once made, cannot be edited through the portal.
-  </footer>
-
-  <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbydf2nWMybXOOpNeyA2ggBZHgCzga5G4L-zH8joRW86ZkMWOWTrpXyogHGH2dHSJNDu/exec';
-
-    function submitForm() {
-      const empId = document.getElementById('empId').value.trim();
-      const date = document.getElementById('entryDate').value;
-      const work = document.getElementById('workDone').value.trim();
-
-      if (!empId || !date || !work) {
-        alert('Please fill out all fields.');
-        return;
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .then(text => {
+      console.log('Response from script:', text);
+      if (text.toLowerCase().includes('success') || text.includes('ok') || text.includes('Web App')) {
+        alert('Submitted successfully!');
+        resetForm();
+      } else {
+        alert('Form submitted, but no confirmation from server. Please check the sheet.');
       }
+    })
+    .catch(error => {
+      console.error('Submission error:', error);
+      alert('Something went wrong. Please try again later.');
+    });
+  }
 
-      const formData = new FormData();
-      formData.append('EmployeeID', empId);
-      formData.append('Date', date);
-      formData.append('WorkDone', work);
-      formData.append('sheet', 'DailyReports');  // Make sure the sheet name matches exactly
-
-      fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response => response.text())
-        .then(text => {
-          console.log('Server response:', text);
-          if (text.toLowerCase().includes('success') || text.includes('Web App')) {
-            alert('Submitted successfully!');
-            resetForm();
-          } else {
-            alert('Submission completed, but please check the Google Sheet.');
-          }
-        })
-        .catch(error => {
-          console.error('Error!', error.message);
-          alert('Error submitting form.');
-        });
-    }
-
-    function resetForm() {
-      document.getElementById('empId').value = '';
-      document.getElementById('entryDate').value = '';
-      document.getElementById('workDone').value = '';
-    }
-  </script>
-
-</body>
-</html>
+  function resetForm() {
+    document.getElementById('empId').value = '';
+    document.getElementById('entryDate').value = '';
+    document.getElementById('workDone').value = '';
+  }
+</script>
