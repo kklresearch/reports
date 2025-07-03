@@ -8,70 +8,83 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: #f0f8ff;
+      background: linear-gradient(to right, #d7e1ec, #f0f8ff);
       margin: 0;
-      padding: 2rem;
+      padding: 2rem 1rem;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
     }
 
-    h2 {
-      color: #2a5d84;
-      margin-bottom: 1rem;
-    }
-
-    form {
+    .container {
       background: white;
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
     }
 
-    .entry-section {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 1rem;
+    h2 {
+      text-align: center;
+      color: #2a5d84;
+      margin-bottom: 1.5rem;
     }
 
     input, textarea {
       font-family: inherit;
-      margin-bottom: 0.8rem;
-      padding: 0.8rem;
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
       border: 1px solid #ccc;
       border-radius: 6px;
-      font-size: 1rem;
+      box-sizing: border-box;
     }
 
-    button {
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
       background-color: #2a5d84;
       color: white;
       border: none;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 0.5rem;
+      transition: background-color 0.3s ease;
     }
 
-    button:hover {
+    .submit-btn:hover {
       background-color: #1e4a6a;
+    }
+
+    .note {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #555;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h2>Submit Daily Report</h2>
-  <form id="dailyForm">
-    <div class="entry-section">
+  <div class="container">
+    <h2>Submit Daily Report</h2>
+    <form id="dailyForm">
       <input type="text" class="emp-id" placeholder="Employee ID" required />
       <input type="date" class="entry-date" required />
-      <textarea class="entry-text" placeholder="Work done" rows="3" required></textarea>
+      <textarea class="entry-text" placeholder="Work done" required></textarea>
+      <button type="button" class="submit-btn" onclick="submitForm('DailyReports', 'dailyForm')">✅ Submit</button>
+    </form>
+    <div class="note">
+      <strong>Note:</strong> Submitted data cannot be edited or deleted. Please verify all entries before submitting.
     </div>
-    <!-- Add Another Day button removed -->
-    <button type="button" onclick="submitForm('DailyReports', 'dailyForm')">✅ Submit</button>
-  </form>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
