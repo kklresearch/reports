@@ -8,44 +8,46 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #d7e1ec, #f0f8ff);
+      background-color: #f5f7fa;
       margin: 0;
       padding: 2rem 1rem;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       min-height: 100vh;
     }
 
     .container {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 100%;
+      background-color: #ffffff;
+      padding: 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
       max-width: 500px;
+      width: 100%;
     }
 
     h2 {
       text-align: center;
-      color: #2a5d84;
-      margin-bottom: 1.5rem;
+      color: #2d3e50;
+      margin-bottom: 2rem;
+      font-size: 1.6rem;
+      font-weight: 600;
     }
 
     input, textarea {
-      font-family: inherit;
       width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      font-size: 1rem;
+      padding: 0.9rem;
+      margin-bottom: 1.2rem;
       border: 1px solid #ccc;
       border-radius: 6px;
-      box-sizing: border-box;
+      font-size: 1rem;
+      font-family: inherit;
+      background-color: #fdfdfd;
     }
 
     textarea {
-      min-height: 100px;
       resize: vertical;
+      min-height: 100px;
     }
 
     .submit-btn {
@@ -58,17 +60,28 @@
       border-radius: 6px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      font-weight: 500;
     }
 
     .submit-btn:hover {
-      background-color: #1e4a6a;
+      background-color: #1f4764;
     }
 
     .note {
       margin-top: 1.5rem;
-      font-size: 0.85rem;
-      color: #555;
+      font-size: 0.8rem;
+      color: #777;
       text-align: center;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
@@ -79,10 +92,10 @@
       <input type="text" class="emp-id" placeholder="Employee ID" required />
       <input type="date" class="entry-date" required />
       <textarea class="entry-text" placeholder="Work done" required></textarea>
-      <button type="button" class="submit-btn" onclick="submitForm('DailyReports', 'dailyForm')">✅ Submit</button>
+      <button type="button" class="submit-btn" onclick="submitForm('DailyReports', 'dailyForm')">Submit</button>
     </form>
     <div class="note">
-      <strong>Note:</strong> Submitted data cannot be edited or deleted. Please verify all entries before submitting.
+      Note: Submitted data cannot be edited or deleted. Please verify all entries before clicking submit.
     </div>
   </div>
   <script src="script.js"></script>
