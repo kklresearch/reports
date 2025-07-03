@@ -6,17 +6,30 @@
   <title>KKL Work Reports</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(to right, #83a4d4, #b6fbff);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      margin: 0;
+    }
+
+    body {
+      justify-content: space-between;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 2rem;
-      text-align: center;
     }
 
     .logo-img {
@@ -55,37 +68,38 @@
       transform: scale(1.05);
     }
 
-    .disclaimer-footnote {
-      margin-top: 4rem;
+    footer {
       font-size: 0.75rem;
       color: #555;
-      max-width: 600px;
+      background-color: transparent;
       text-align: center;
-      line-height: 1.4;
+      padding: 1rem 2rem;
+      width: 100%;
+      max-width: 700px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Logo Image -->
-  <img src="logo.png" alt="KisanKraft Logo" class="logo-img" />
+  <main>
+    <!-- Logo Image -->
+    <img src="logo.png" alt="KisanKraft Logo" class="logo-img" />
 
-  <!-- Subtitle -->
-  <div class="subtitle">Seeds Department</div>
+    <!-- Subtitle -->
+    <div class="subtitle">Seeds Department</div>
 
-  <!-- Main Heading -->
-  <h1>Daily & Weekly Reports</h1>
+    <!-- Main Heading -->
+    <h1>Daily & Weekly Reports</h1>
 
-  <!-- Buttons -->
-  <button class="button" onclick="location.href='daily.html'">📅 Submit Daily Report</button>
-  <button class="button" onclick="location.href='weekly.html'">📝 Submit Weekly Plan</button>
+    <!-- Buttons -->
+    <button class="button" onclick="location.href='daily.html'">📅 Submit Daily Report</button>
+    <button class="button" onclick="location.href='weekly.html'">📝 Submit Weekly Plan</button>
+  </main>
 
-  <!-- Minimal Disclaimer -->
-  <div class="disclaimer-footnote">
-    <p>
-      <strong>Disclaimer:</strong> This portal is for employees of the Seeds Department to submit daily reports and weekly plans. Submitted data is linked to your Employee ID and stored securely for internal use. Entries cannot be edited through the portal — please contact your manager if any correction is needed.
-    </p>
-  </div>
+  <!-- Footer Disclaimer -->
+  <footer>
+    <strong>Disclaimer:</strong> This portal is for employees of the Seeds Department of KisanKraft Limited to submit daily work done reports and weekly plans. Submitted data is linked to your Employee ID and stored securely and may be used for internal purposes. Entries once made, cannot be edited through the portal.
+  </footer>
 
 </body>
 </html>
