@@ -1,37 +1,52 @@
-function addEntry(formId) {
+// ✅ This is your actual Google Apps Script Web App endpoint
+const endpoint = "https://script.google.com/macros/s/AKfycbw7k0VQEZWMP5i3IZlMwlI7QpVClawl7U9mDPvKOaFlA3dpr7IHVnI7J7RhdzZgRDy7/exec";
+
+// ✅ Submit the form to Google Sheets
+function submitForm(sheetName, formId) {
   const form = document.getElementById(formId);
-  const firstEntry = form.querySelector(".day-entry");
-  const newEntry = firstEntry.cloneNode(true);
-  form.insertBefore(newEntry, form.children[form.children.length - 2]);
+  const rows = [];
+
+  const sections = form.querySelectorAll(".entry-section");
+  sections.forEach(section => {
+    const empId = section.querySelector(".emp-id").value.trim();
+    const date = section.querySelector(".entry-date").value;
+    const text = section.querySelector(".entry-text").value.trim();
+
+    if (empId && date && text) {
+      rows.push([empId, date, text]);
+    }
+  });
+
+  if (rows.length === 0) {
+    alert("Please fill out at least one complete row.");
+    return;
+  }
+
+  fetch(`${endpoint}?sheet=${sheetName}`, {
+    method: "POST",
+    body: JSON.stringify(rows),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.text())
+    .then(msg => {
+      alert(msg === "Success" ? "Submitted successfully!" : msg);
+      form.reset();
+    })
+    .catch(err => {
+      console.error("Error submitting form:", err);
+      alert("Something went wrong. Please try again.");
+    });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("form").forEach(form => {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const data = [];
-      const entries = form.querySelectorAll(".day-entry");
+// ✅ Add a new row to the form dynamically
+function addEntry(formId) {
+  const form = document.getElementById(formId);
+  const section = form.querySelector(".entry-section");
+  const clone = section.cloneNode(true);
 
-      entries.forEach(entry => {
-        const empId = entry.querySelector("input[name='employeeId']").value;
-        const date = entry.querySelector("input[name='date']").value;
-        const work = entry.querySelector("input[name='workDone']")?.value ||
-                     entry.querySelector("input[name='plan']")?.value;
-
-        data.push([empId, date, work]);
-      });
-
-      // Choose sheet name based on form ID
-      const sheetName = form.id === "dailyForm" ? "DailyReports" : "WeeklyPlans";
-
-      fetch(`https://script.google.com/macros/u/1/s/AKfycbwrn-9y-N8P14uqBk_0g9uF_yWj9MYdQVYsqZrs8sfGIlWZPqQAeAYBXvau-gjzFNs0pw/exec?sheet=${sheetName}`, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify(data)
-      });
-
-      alert("Submitted!");
-      form.reset();
-    });
-  });
-});
+  // Clear input values in cloned section
+  clone.querySelectorAll("input, textarea").forEach(input => (input.value = ""));
+  form.insertBefore(clone, form.querySelector("button[type='button']"));
+}
