@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KKL Work Reports</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -19,13 +19,9 @@
       text-align: center;
     }
 
-    .logo {
-      font-family: 'Great Vibes', cursive;
-      font-size: 3rem;
-      background-color: black;
-      color: yellow;
-      padding: 0.5rem 1.5rem;
-      border-radius: 8px;
+    .logo-img {
+      width: 300px;
+      max-width: 80%;
       margin-bottom: 0.5rem;
     }
 
@@ -61,10 +57,16 @@
   </style>
 </head>
 <body>
-  <div class="logo">KisanKraft</div>
-  <div class="subtitle">KKL Seeds Department</div>
+  <!-- 👇 Logo Image -->
+  <img src="logo.png" alt="KisanKraft Logo" class="logo-img" />
+  
+  <!-- 👇 Subtitle -->
+  <div class="subtitle">Seeds Department</div>
+
+  <!-- 👇 Heading -->
   <h1>Daily & Weekly Reports</h1>
 
+  <!-- 👇 Buttons -->
   <button class="button" onclick="location.href='daily.html'">📅 Submit Daily Report</button>
   <button class="button" onclick="location.href='weekly.html'">📝 Submit Weekly Plan</button>
 </body>
