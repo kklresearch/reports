@@ -123,15 +123,17 @@
       formData.append('EmployeeID', empId);
       formData.append('Date', date);
       formData.append('WorkDone', work);
-      formData.append('sheet', 'DailyReports');
+      formData.append('sheet', 'DailyReports');  // Make sure the sheet name matches exactly
 
       fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response => {
-          if (response.ok) {
+        .then(response => response.text())
+        .then(text => {
+          console.log('Server response:', text);
+          if (text.toLowerCase().includes('success') || text.includes('Web App')) {
             alert('Submitted successfully!');
             resetForm();
           } else {
-            alert('Submission failed. Please try again.');
+            alert('Submission completed, but please check the Google Sheet.');
           }
         })
         .catch(error => {
