@@ -35,9 +35,9 @@ function submitForm(sheetName, formId) {
       form.reset();
     })
     .catch(err => {
-      console.error("Error submitting form:", err);
-      alert("Something went wrong. Please try again.");
-    });
+  console.error("Fetch error:", err);
+  alert("Something went wrong. Details: " + err.message);
+});
 }
 
 // ✅ Add a new row to the form dynamically
