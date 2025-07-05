@@ -1,24 +1,30 @@
-// ✅ Replace with your actual Google Apps Script Web App URL
 const scriptURL = 'https://script.google.com/macros/s/AKfycbydf2nWMybXOOpNeyA2ggBZHgCzga5G4L-zH8joRW86ZkMWOWTrpXyogHGH2dHSJNDu/exec';
 
-// ✅ Handle form submission (supports only one entry at a time)
 function submitForm(sheetName, formId) {
   const form = document.getElementById(formId);
-  const entry = form.querySelector('.entry-section');
+  const entries = form.querySelectorAll('.entry-section');
 
-  const empId = entry.querySelector('.emp-id').value.trim();
-  const date = entry.querySelector('.entry-date').value;
-  const text = entry.querySelector('.entry-text').value.trim();
+  let formData = new FormData();
+  let hasValidRow = false;
 
-  if (!empId || !date || !text) {
-    alert("Please fill all fields before submitting.");
+  entries.forEach((entry, index) => {
+    const empId = entry.querySelector('.emp-id').value.trim();
+    const date = entry.querySelector('.entry-date').value;
+    const work = entry.querySelector('.entry-text').value.trim();
+
+    if (empId && date && work) {
+      hasValidRow = true;
+      formData.append(`EmployeeID_${index}`, empId);
+      formData.append(`Date_${index}`, date);
+      formData.append(`WorkDone_${index}`, work);
+    }
+  });
+
+  if (!hasValidRow) {
+    alert("Please fill out at least one complete row.");
     return;
   }
 
-  const formData = new FormData();
-  formData.append('EmployeeID_0', empId);
-  formData.append('Date_0', date);
-  formData.append('WorkDone_0', text);
   formData.append('sheet', sheetName);
 
   fetch(scriptURL, {
@@ -26,12 +32,25 @@ function submitForm(sheetName, formId) {
     body: formData
   })
     .then(response => response.text())
-    .then(result => {
-      alert("Submitted successfully.");
-      window.location.href = 'index.html';
+    .then(responseText => {
+      alert("Submitted successfully");
+      window.location.href = "index.html";
     })
     .catch(error => {
-      console.error('Error!', error.message);
-      alert("Submission failed. Please try again.");
+      console.error("Error!", error.message);
+      alert("Failed to submit. Please try again.");
     });
+}
+
+function addEntry(formId) {
+  const form = document.getElementById(formId);
+  const firstEntry = form.querySelector('.entry-section');
+  const newEntry = firstEntry.cloneNode(true);
+
+  newEntry.querySelector('.emp-id').value = '';
+  newEntry.querySelector('.entry-date').value = '';
+  newEntry.querySelector('.entry-text').value = '';
+
+  const buttonRow = form.querySelector('.button-row');
+  form.insertBefore(newEntry, buttonRow);
 }
