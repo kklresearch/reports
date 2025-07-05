@@ -1,56 +1,111 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbydf2nWMybXOOpNeyA2ggBZHgCzga5G4L-zH8joRW86ZkMWOWTrpXyogHGH2dHSJNDu/exec';
-
-function submitForm(sheetName, formId) {
-  const form = document.getElementById(formId);
-  const entries = form.querySelectorAll('.entry-section');
-
-  let hasValidRow = false;
-  let formData = new FormData();
-
-  entries.forEach((entry, index) => {
-    const empId = entry.querySelector('.emp-id').value.trim();
-    const date = entry.querySelector('.entry-date').value;
-    const text = entry.querySelector('.entry-text').value.trim();
-
-    if (empId && date && text) {
-      hasValidRow = true;
-      formData.append(`EmployeeID_${index}`, empId);
-      formData.append(`Date_${index}`, date);
-      formData.append(`WorkDone_${index}`, text);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KKL Work Reports</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
     }
-  });
 
-  if (!hasValidRow) {
-    alert("Please fill out at least one complete row.");
-    return;
-  }
+    html, body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #83a4d4, #b6fbff);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-  formData.append('sheet', sheetName);
+    body {
+      justify-content: space-between;
+    }
 
-  fetch(scriptURL, {
-    method: 'POST',
-    body: formData
-  })
-    .then(response => response.text())
-    .then(responseText => {
-      alert("Submitted successfully");
-      window.location.reload();
-    })
-    .catch(error => {
-      alert("Error submitting the form. Please try again.");
-      console.error("Submission error:", error);
-    });
-}
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      width: 100%;
+    }
 
-function addEntry(formId) {
-  const form = document.getElementById(formId);
-  const firstEntry = form.querySelector('.entry-section');
-  const newEntry = firstEntry.cloneNode(true);
+    .logo-img {
+      width: 300px;
+      max-width: 80%;
+      margin-bottom: 0.5rem;
+    }
 
-  newEntry.querySelector('.emp-id').value = '';
-  newEntry.querySelector('.entry-date').value = '';
-  newEntry.querySelector('.entry-text').value = '';
+    .subtitle {
+      font-size: 1.2rem;
+      color: #004466;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
 
-  const buttonRow = form.querySelector('.button-row');
-  form.insertBefore(newEntry, buttonRow);
-}
+    h1 {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 2rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .button {
+      background-color: #ffffffcc;
+      color: #333;
+      border: none;
+      padding: 1rem 2rem;
+      margin: 1rem;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.05);
+    }
+
+    footer {
+      font-size: 0.75rem;
+      color: #555;
+      background-color: transparent;
+      text-align: center;
+      padding: 1rem 2rem;
+      width: 100%;
+      max-width: 700px;
+      position: relative;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <!-- Logo Image -->
+    <img src="logo.png" alt="KisanKraft Logo" class="logo-img" />
+
+    <!-- Subtitle -->
+    <div class="subtitle">Seeds Department</div>
+
+    <!-- Main Heading -->
+    <h1>Daily & Weekly Reports</h1>
+
+    <!-- Buttons -->
+    <button class="button" onclick="location.href='daily.html'">📅 Submit Daily Report</button>
+    <button class="button" onclick="location.href='weekly.html'">📝 Submit Weekly Plan</button>
+  </main>
+
+  <!-- Footer Disclaimer -->
+  <footer>
+    <strong>Disclaimer:</strong> This portal is for employees of the Seeds Department of KisanKraft Limited to submit daily work done reports and weekly plans. Submitted data is linked to your Employee ID and stored securely for internal use only. Once submitted, entries cannot be edited or deleted via this portal. Please verify before submitting.
+  </footer>
+
+</body>
+</html>
