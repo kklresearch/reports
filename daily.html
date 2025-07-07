@@ -1,50 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daily Report - KKL</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Link to the shared CSS -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Report</title>
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
+    <header>
+        <h1>Daily Report</h1>
+        </header>
 
-  <main>
-    <div class="form-container">
-      <a href="index.html"><img src="logo.png" alt="KisanKraft Logo" class="logo-img" /></a>
-      <h1>Submit Daily Report</h1>
-      <form id="daily-form" novalidate>
-        <div class="form-group">
-          <label for="employeeId">Employee ID</label>
-          <input type="text" id="employeeId" name="employeeId" required placeholder="Enter your Employee ID">
-        </div>
-        <div class="form-group">
-          <label for="date">Date</label>
-          <input type="date" id="date" name="date" required>
-        </div>
-        <div class="form-group">
-          <label for="workDone">Work Done Today</label>
-          <textarea id="workDone" name="workDone" rows="5" required placeholder="Describe the tasks you completed..."></textarea>
-        </div>
-        <button type="submit" class="submit-btn" id="submit-btn">Submit Report</button>
-      </form>
-      <a href="index.html" class="home-link">← Back to Home</a>
-    </div>
-  </main>
+    <main>
+        <form id="daily-report-form" 
+              action="https://docs.google.com/forms/d/e/1FAIpQLSeVIqmlE9FHCmCz8XQ3NbQKqLhPmcChgfE3b_SYAhkARtUlrg/formResponse" 
+              method="POST" 
+              target="google-form-iframe">
 
-  <!-- Modal for Success/Error Messages -->
-  <div id="responseModal" class="modal">
-    <div class="modal-content">
-      <h2 id="modal-title"></h2>
-      <p id="modal-message"></p>
-      <button id="modal-close-btn" class="modal-close-btn">Close</button>
-    </div>
-  </div>
+            <label for="employeeId">Employee ID:</label>
+            <input type="text" id="employeeId" name="entry.1107464652" required>
 
-  <!-- Link to the JavaScript file -->
-  <script src="script.js"></script>
-</body>
+            <label for="workDone">Work Done:</label>
+            <textarea id="workDone" name="entry.1252353547" rows="5" required></textarea>
+
+            <label>Date:</label>
+            <div class="date-inputs">
+                <label for="date_month">Month:</label>
+                <input type="number" id="date_month" name="entry.1121565543_month" placeholder="MM" min="1" max="12" required style="width: 60px;">
+                
+                <label for="date_day">Day:</label>
+                <input type="number" id="date_day" name="entry.1121565543_day" placeholder="DD" min="1" max="31" required style="width: 60px;">
+                
+                <label for="date_year">Year:</label>
+                <input type="number" id="date_year" name="entry.1121565543_year" placeholder="YYYY" min="1900" max="2100" required style="width: 80px;">
+            </div>
+
+            <button type="submit">Submit Daily Report</button>
+        </form>
+    </main>
+
+    <footer>
+        </footer>
+
+    <iframe name="google-form-iframe" style="display:none;"></iframe>
+
+    </body>
 </html>
