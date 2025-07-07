@@ -126,6 +126,8 @@ nav a {
 .index-hero nav.main-nav ul {
     gap: 20px; /* Adjust gap for main nav links */
     flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+    /* Ensure items stack on small screens */
+    flex-direction: row; /* Default for larger screens */
 }
 
 .index-hero nav.main-nav a {
@@ -137,6 +139,10 @@ nav a {
     font-weight: 600;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    /* Added to ensure links don't get too wide on small screens */
+    display: inline-block; /* Behave like a block, but allow other items on same line */
+    min-width: 200px; /* Ensure a minimum width */
+    text-align: center;
 }
 
 .index-hero nav.main-nav a:hover {
@@ -348,16 +354,28 @@ footer {
         font-size: 1em;
         margin-bottom: 20px;
     }
-    nav ul, .index-hero nav.main-nav ul {
-        flex-direction: column;
-        gap: 15px;
+    /* Adjusted nav for index page on smaller screens */
+    .index-hero nav.main-nav ul {
+        flex-direction: column; /* Stack links vertically */
+        gap: 15px; /* Space between stacked links */
     }
-    nav a, .index-hero nav.main-nav a {
-        padding: 12px 25px;
+    .index-hero nav.main-nav a {
         width: 80%; /* Make links take more width */
         max-width: 300px; /* Limit max width */
         margin: 0 auto; /* Center links */
+        display: block; /* Ensure they take full width for centering */
     }
+    /* End of index-hero nav adjustments */
+
+    nav ul { /* General nav, mostly for daily/weekly */
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav a { /* General nav, mostly for daily/weekly */
+        padding: 10px 20px;
+        display: block;
+    }
+
     form {
         padding: 25px;
         gap: 15px;
