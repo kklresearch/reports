@@ -40,11 +40,16 @@ function submitForm(sheetName, formId) {
   })
     .then(response => response.text())
     .then(responseText => {
-      alert("Submitted successfully");
-      window.location.href = "index.html";
+      console.log("Response Text:", responseText);
+      if (responseText.trim() === "Success") {
+        alert("Submitted successfully");
+        window.location.href = "index.html";
+      } else {
+        alert("Server Error: " + responseText);
+      }
     })
     .catch(error => {
-      console.error("Error!", error.message);
+      console.error("Fetch Error:", error);
       alert("Failed to submit. Please try again.");
     });
 }
