@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Fetch</title>
+</head>
+<body>
+  <h1>Simple Fetch Test</h1>
+  <button id="testButton">Send POST Request</button>
+  <div id="response"></div>
+
+  <script>
+    const TEST_WEB_APP_URL = 'PASTE_THE_NEW_URL_FROM_YOUR_MVE_DEPLOYMENT_HERE';
+
+    document.getElementById('testButton').addEventListener('click', async () => {
+      const responseDiv = document.getElementById('response');
+      responseDiv.textContent = 'Sending request...';
+
+      try {
+        const res = await fetch(TEST_WEB_APP_URL, {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          redirect: 'follow',
+          body: JSON.stringify({ testData: 'Hello World' }),
+        });
+
+        const data = await res.json();
+        responseDiv.textContent = `Response: ${JSON.stringify(data)}`;
+      } catch (error) {
+        responseDiv.textContent = `Error: ${error.message}`;
+        console.error('Fetch error:', error);
+      }
+    });
+  </script>
+</body>
+</html>
