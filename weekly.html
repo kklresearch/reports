@@ -4,22 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weekly Plan - KKL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"> </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Link to the shared CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
   <main>
     <div class="form-container">
-      <img src="logo.png" alt="KisanKraft Logo" class="logo-img" />
+      <a href="index.html"><img src="logo.png" alt="KisanKraft Logo" class="logo-img" /></a>
       <h1>Submit Weekly Plan</h1>
-      <form id="weekly-form">
+      <form id="weekly-form" novalidate>
         <div class="form-group">
           <label for="employeeId">Employee ID</label>
-          <input type="text" id="employeeId" name="employeeId" required>
+          <input type="text" id="employeeId" name="employeeId" required placeholder="Enter your Employee ID">
         </div>
         
         <div id="plan-entries-container">
-          </div>
+          <!-- Plan entries will be added here by JavaScript -->
+        </div>
 
         <button type="button" id="add-day-btn" class="button add-btn">➕ Add Plan for a Day</button>
         <button type="submit" class="submit-btn" id="submit-btn">Submit Full Plan</button>
@@ -28,6 +33,7 @@
     </div>
   </main>
 
+  <!-- Modal for Success/Error Messages -->
   <div id="responseModal" class="modal">
     <div class="modal-content">
       <h2 id="modal-title"></h2>
@@ -36,6 +42,7 @@
     </div>
   </div>
 
+  <!-- Link to the JavaScript file -->
   <script src="script.js"></script>
 </body>
 </html>
