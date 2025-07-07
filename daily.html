@@ -4,18 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daily Report - KKL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"> </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Link to the shared CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
   <main>
     <div class="form-container">
-      <img src="logo.png" alt="KisanKraft Logo" class="logo-img" />
+      <a href="index.html"><img src="logo.png" alt="KisanKraft Logo" class="logo-img" /></a>
       <h1>Submit Daily Report</h1>
-      <form id="daily-form">
+      <form id="daily-form" novalidate>
         <div class="form-group">
           <label for="employeeId">Employee ID</label>
-          <input type="text" id="employeeId" name="employeeId" required>
+          <input type="text" id="employeeId" name="employeeId" required placeholder="Enter your Employee ID">
         </div>
         <div class="form-group">
           <label for="date">Date</label>
@@ -23,7 +27,7 @@
         </div>
         <div class="form-group">
           <label for="workDone">Work Done Today</label>
-          <textarea id="workDone" name="workDone" rows="5" required></textarea>
+          <textarea id="workDone" name="workDone" rows="5" required placeholder="Describe the tasks you completed..."></textarea>
         </div>
         <button type="submit" class="submit-btn" id="submit-btn">Submit Report</button>
       </form>
@@ -31,6 +35,7 @@
     </div>
   </main>
 
+  <!-- Modal for Success/Error Messages -->
   <div id="responseModal" class="modal">
     <div class="modal-content">
       <h2 id="modal-title"></h2>
@@ -39,6 +44,7 @@
     </div>
   </div>
 
+  <!-- Link to the JavaScript file -->
   <script src="script.js"></script>
 </body>
 </html>
