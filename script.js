@@ -4,25 +4,19 @@ function submitForm(sheetName, formId) {
   const form = document.getElementById(formId);
   const entries = form.querySelectorAll('.entry-section');
 
-  const data = {
-    sheet: sheetName,
-    entries: []
-  };
-
+  let formData = new FormData();
   let hasValidRow = false;
 
-  entries.forEach(entry => {
+  entries.forEach((entry, index) => {
     const empId = entry.querySelector('.emp-id').value.trim();
     const date = entry.querySelector('.entry-date').value;
     const work = entry.querySelector('.entry-text').value.trim();
 
     if (empId && date && work) {
       hasValidRow = true;
-      data.entries.push({
-        empId,
-        date,
-        work
-      });
+      formData.append(`empId_${index}`, empId);
+      formData.append(`date_${index}`, date);
+      formData.append(`work_${index}`, work);
     }
   });
 
@@ -31,25 +25,25 @@ function submitForm(sheetName, formId) {
     return;
   }
 
+  formData.append('sheet', sheetName);
+  formData.append('count', entries.length);
+
   fetch(scriptURL, {
     method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    body: formData,
   })
     .then(response => response.text())
     .then(responseText => {
-      console.log("Response Text:", responseText);
+      console.log("Server response:", responseText);
       if (responseText.trim() === "Success") {
         alert("Submitted successfully");
         window.location.href = "index.html";
       } else {
-        alert("Server Error: " + responseText);
+        alert("Error from server: " + responseText);
       }
     })
     .catch(error => {
-      console.error("Fetch Error:", error);
+      console.error("Error!", error.message);
       alert("Failed to submit. Please try again.");
     });
 }
