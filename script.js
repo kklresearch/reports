@@ -4,19 +4,25 @@ function submitForm(sheetName, formId) {
   const form = document.getElementById(formId);
   const entries = form.querySelectorAll('.entry-section');
 
-  let formData = new FormData();
+  const data = {
+    sheet: sheetName,
+    entries: []
+  };
+
   let hasValidRow = false;
 
-  entries.forEach((entry, index) => {
+  entries.forEach(entry => {
     const empId = entry.querySelector('.emp-id').value.trim();
     const date = entry.querySelector('.entry-date').value;
     const work = entry.querySelector('.entry-text').value.trim();
 
     if (empId && date && work) {
       hasValidRow = true;
-      formData.append(`EmployeeID_${index}`, empId);
-      formData.append(`Date_${index}`, date);
-      formData.append(`WorkDone_${index}`, work);
+      data.entries.push({
+        empId,
+        date,
+        work
+      });
     }
   });
 
@@ -25,11 +31,12 @@ function submitForm(sheetName, formId) {
     return;
   }
 
-  formData.append('sheet', sheetName);
-
   fetch(scriptURL, {
     method: 'POST',
-    body: formData
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
   })
     .then(response => response.text())
     .then(responseText => {
