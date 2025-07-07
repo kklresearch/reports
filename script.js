@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   // The URL for the Google Apps Script Web App.
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzY9waUd8gQmxI1FBytHLKV0tSTCQfV2b16uFiVh4OkRNShEGCceDK5VrxHgvj5kqfb/exec';
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzVylWUGTAzXD_3H1ed3BxcOtTF2xGi_BKn9mM-vCrq_Xh2RebqRUHH3v1VEWNJEYph/exec';
 
   // Get references to common elements
   const dailyForm = document.getElementById('daily-form');
