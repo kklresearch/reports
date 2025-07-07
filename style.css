@@ -3,11 +3,17 @@
     --primary-color: #4CAF50; /* Green for actions */
     --secondary-color: #333; /* Dark text */
     --accent-color: #007bff; /* Blue for links/highlights */
-    --background-light: #f4f7f6; /* Light background */
+    --background-light: #f4f7f6; /* Light background for forms */
     --background-white: #ffffff; /* Card/form background */
     --border-color: #e0e0e0; /* Light borders */
     --text-light: #666; /* Lighter text */
     --shadow-light: rgba(0, 0, 0, 0.08);
+
+    /* New colors for the landing page */
+    --hero-bg-dark: #2c3e50; /* Dark blue/grey for hero section */
+    --hero-text-light: #ecf0f1; /* Light text for hero section */
+    --gradient-start: #3498db; /* A blue */
+    --gradient-end: #8e44ad;   /* A purple */
 }
 
 * {
@@ -20,21 +26,22 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--secondary-color);
-    background-color: var(--background-light);
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); /* Colorful gradient background */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding: 20px; /* Overall padding around content */
+    padding: 0; /* Remove overall padding, sections will handle it */
 }
 
-/* Header */
+/* Header (General styles for daily/weekly reports) */
 header {
     background-color: var(--background-white);
     padding: 20px 30px;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px; /* Rounded bottom corners */
     box-shadow: 0 4px 8px var(--shadow-light);
     margin-bottom: 30px;
     text-align: center;
+    color: var(--secondary-color); /* Default text color for non-index headers */
 }
 
 header h1 {
@@ -44,7 +51,55 @@ header h1 {
     font-weight: 600;
 }
 
-/* Navigation (if you have one) */
+/* --- Specific Styles for the Index Page Header (Hero Section) --- */
+.index-hero {
+    background: var(--hero-bg-dark); /* Dark background for logo visibility */
+    color: var(--hero-text-light); /* Light text on dark background */
+    padding: 60px 20px; /* More padding for a hero feel */
+    text-align: center;
+    border-radius: 0; /* No rounded corners for the hero section */
+    box-shadow: none; /* Remove shadow if it clashes with hero look */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 40vh; /* Make it take up more vertical space */
+    position: relative; /* For potential background elements */
+}
+
+.index-hero::before { /* Subtle overlay for texture/depth */
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.1);
+    pointer-events: none;
+}
+
+.index-hero h1 {
+    color: var(--hero-text-light); /* Override default h1 color */
+    font-size: 3.2em; /* Larger for impact */
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Subtle text shadow */
+    z-index: 1; /* Bring text above overlay */
+}
+
+.index-hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    max-width: 700px;
+    line-height: 1.5;
+    z-index: 1;
+}
+
+/* Logo in Header */
+.hero-logo {
+    max-width: 250px; /* Size for the logo */
+    height: auto;
+    margin-bottom: 25px;
+    z-index: 1;
+}
+
+/* Main Navigation (General, applies to daily/weekly) */
 nav ul {
     list-style: none;
     padding: 0;
@@ -62,21 +117,44 @@ nav a {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-nav a:hover {
-    background-color: var(--primary-color);
-    color: var(--background-white);
+/* --- Specific Nav Styling for Index Page --- */
+.index-hero nav.main-nav {
+    margin-top: 20px; /* Space from description */
+    z-index: 1;
 }
 
-/* Main Content Area */
+.index-hero nav.main-nav ul {
+    gap: 20px; /* Adjust gap for main nav links */
+    flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+}
+
+.index-hero nav.main-nav a {
+    background-color: var(--primary-color); /* Green background for main links */
+    color: var(--background-white);
+    padding: 15px 30px; /* Larger clickable area */
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.index-hero nav.main-nav a:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+/* Main Content Area (General, mostly for forms) */
 main {
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Align forms to the top */
-    padding: 20px 0; /* Vertical padding */
+    padding: 20px; /* Overall padding for content */
 }
 
-/* Form Container Styling */
+/* Form Container Styling (for daily/weekly reports) */
 form {
     background-color: var(--background-white);
     padding: 40px;
@@ -87,13 +165,14 @@ form {
     display: flex;
     flex-direction: column;
     gap: 20px; /* Space between form elements */
+    margin: auto; /* Center the form if main is not flex */
 }
 
 form label {
     font-weight: 600;
     color: var(--secondary-color);
     margin-bottom: 5px;
-    display: block; /* Make labels take full width */
+    display: block;
 }
 
 form input[type="text"],
@@ -112,32 +191,32 @@ form input[type="text"]:focus,
 form input[type="number"]:focus,
 form textarea:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* Light green shadow on focus */
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
     outline: none;
 }
 
 form textarea {
-    resize: vertical; /* Allow vertical resizing */
+    resize: vertical;
     min-height: 100px;
 }
 
 /* Date Inputs Specific Styling */
 .date-inputs {
     display: flex;
-    gap: 10px; /* Space between month, day, year inputs */
+    gap: 10px;
     align-items: center;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
+    flex-wrap: wrap;
 }
 
 .date-inputs label {
-    margin-bottom: 0; /* Remove extra margin */
-    flex-basis: auto; /* Let labels size naturally */
-    white-space: nowrap; /* Keep label on one line */
+    margin-bottom: 0;
+    flex-basis: auto;
+    white-space: nowrap;
 }
 
 .date-inputs input {
-    flex-grow: 1; /* Allow inputs to grow */
-    max-width: 80px; /* Max width for individual date parts */
+    flex-grow: 1;
+    max-width: 80px;
     text-align: center;
 }
 
@@ -152,13 +231,13 @@ button[type="submit"] {
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    align-self: center; /* Center the button */
-    margin-top: 15px; /* Space above button */
+    align-self: center;
+    margin-top: 15px;
 }
 
 button[type="submit"]:hover {
-    background-color: #45a049; /* Slightly darker green on hover */
-    transform: translateY(-2px); /* Slight lift effect */
+    background-color: #45a049;
+    transform: translateY(-2px);
 }
 
 button[type="submit"]:active {
@@ -169,13 +248,25 @@ button[type="submit"]:active {
 /* Footer */
 footer {
     text-align: center;
-    padding: 20px;
-    color: var(--text-light);
+    padding: 25px 20px; /* Increased padding */
+    color: var(--hero-text-light); /* Lighter text for footer on gradient background */
     font-size: 0.9em;
-    margin-top: 40px;
+    margin-top: auto; /* Push footer to the bottom */
+    background: rgba(0,0,0,0.2); /* Slight dark background for readability */
 }
 
-/* Confirmation Pop-up Styling */
+.disclaimer {
+    font-size: 0.75em; /* Smaller font for disclaimer */
+    color: rgba(255, 255, 255, 0.8); /* Slightly faded white */
+    margin-top: 15px; /* Space above disclaimer */
+    line-height: 1.4;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Confirmation Pop-up Styling (No change from previous) */
 .confirmation-popup {
     display: none; /* Hidden by default */
     position: fixed;
@@ -242,16 +333,30 @@ footer {
     transform: translateY(-1px);
 }
 
-/* Responsive adjustments */
+/* --- Responsive adjustments --- */
 @media (max-width: 768px) {
     body {
-        padding: 15px;
+        padding: 0; /* Sections will manage padding */
     }
-    header {
-        padding: 15px 20px;
+    header, .index-hero { /* Apply to both general header and hero */
+        padding: 30px 15px;
     }
-    header h1 {
-        font-size: 2em;
+    header h1, .index-hero h1 {
+        font-size: 2.2em;
+    }
+    .index-hero p {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+    nav ul, .index-hero nav.main-nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav a, .index-hero nav.main-nav a {
+        padding: 12px 25px;
+        width: 80%; /* Make links take more width */
+        max-width: 300px; /* Limit max width */
+        margin: 0 auto; /* Center links */
     }
     form {
         padding: 25px;
@@ -261,25 +366,33 @@ footer {
         padding: 25px 30px;
         max-width: 90%;
     }
+    footer {
+        padding: 20px 15px;
+    }
 }
 
 @media (max-width: 480px) {
-    header h1 {
+    .index-hero h1 {
         font-size: 1.8em;
     }
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
+    .hero-logo {
+        max-width: 200px;
     }
-    nav a {
-        padding: 10px;
-        display: block; /* Make links block level */
+    .index-hero p {
+        font-size: 0.9em;
+    }
+    .index-hero nav.main-nav a {
+        font-size: 1em;
+        padding: 10px 20px;
     }
     form {
-        padding: 20px;
+        padding: 15px;
     }
     .date-inputs input {
         width: 100%;
         max-width: 100px; /* Allow full width up to max */
+    }
+    .disclaimer {
+        font-size: 0.7em;
     }
 }
