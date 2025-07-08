@@ -177,7 +177,7 @@ form {
     margin: auto; /* Center the form if main is not flex */
 }
 
-/* New: Styling for the guidance message */
+/* Styling for the guidance message */
 .form-guidance {
     background-color: #fff3cd; /* Light yellow background */
     border-left: 5px solid #ffc107; /* Yellow left border */
@@ -201,7 +201,8 @@ form label {
 
 form input[type="text"],
 form input[type="number"],
-form textarea {
+form textarea,
+form select { /* Added select to general input styling */
     width: 100%;
     padding: 12px;
     border: 1px solid var(--border-color);
@@ -213,7 +214,8 @@ form textarea {
 
 form input[type="text"]:focus,
 form input[type="number"]:focus,
-form textarea:focus {
+form textarea:focus,
+form select:focus { /* Added select to focus styling */
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
     outline: none;
