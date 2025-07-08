@@ -158,8 +158,9 @@ nav a {
 main {
     flex-grow: 1;
     display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align forms to the top */
+    flex-direction: column; /* Allow sections to stack */
+    justify-content: flex-start;
+    align-items: center; /* Center content horizontally */
     padding: 20px; /* Overall padding for content */
 }
 
@@ -337,10 +338,10 @@ footer {
 }
 
 
-/* Disclaimer in Header (new position) */
+/* Disclaimer in Header (new position and font size) */
 .header-disclaimer {
-    font-size: 0.75em;
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.7em; /* Reduced font size */
+    color: rgba(255, 255, 255, 0.7); /* Slightly softer white */
     margin-top: 25px; /* Space it from the nav links */
     line-height: 1.4;
     max-width: 800px;
@@ -350,34 +351,45 @@ footer {
 }
 
 
-/* GRN Section in Main Content (the "light box") */
+/* GRN Section in Main Content (now a dark section, not a white box) */
 .grn-section {
-    background-color: var(--background-white);
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px var(--shadow-light);
+    background-color: var(--hero-bg-dark); /* Match the hero background color */
+    color: var(--hero-text-light); /* Light text for readability on dark background */
+    padding: 40px; /* Keep internal padding */
+    border-radius: 0; /* No rounded corners */
+    box-shadow: none; /* No shadow */
     width: 100%;
-    max-width: 550px; /* Same max-width as forms for consistency */
+    max-width: 550px; 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content within the box */
-    gap: 15px; /* Space between elements in the box */
+    align-items: center; 
+    gap: 15px; 
     margin-top: 30px; /* Space from the header */
     margin-bottom: 30px; /* Space from the footer */
-    text-align: center; /* Center text */
+    text-align: center; 
 }
 
 .grn-section h2 {
-    color: var(--secondary-color);
+    color: var(--hero-text-light); /* Ensure title is light */
     font-size: 2em;
     margin-bottom: 5px;
 }
 
 .grn-section p {
-    color: var(--text-light);
+    color: rgba(255, 255, 255, 0.9); /* Slightly softer light for paragraphs */
     font-size: 1.05em;
     margin-bottom: 15px;
 }
+
+/* New disclaimer inside GRN box */
+.grn-disclaimer {
+    font-size: 0.7em; /* Small font size */
+    color: rgba(255, 255, 255, 0.6); /* Even softer white for this disclaimer */
+    margin-top: 15px; /* Space from the button */
+    line-height: 1.4;
+    max-width: 90%; /* Keep it within the box */
+}
+
 
 .grn-link-button {
     background-color: var(--primary-color);
@@ -522,8 +534,13 @@ footer {
     /* Responsive for GRN Section */
     .grn-section {
         padding: 25px;
-        margin-left: 15px;
-        margin-right: 15px;
+        margin-left: 0px; /* Remove side margins for full width effect */
+        margin-right: 0px;
+        max-width: none; /* Allow it to take full width */
+        width: 100%; /* Ensure it spans fully */
+        border-radius: 0; /* Ensure no border-radius remains */
+        margin-top: 20px; /* Slightly less space from hero on small screens */
+        margin-bottom: 20px;
     }
     .grn-section h2 {
         font-size: 1.8em;
@@ -582,5 +599,8 @@ footer {
     }
     .grn-section p {
         font-size: 0.9em;
+    }
+    .grn-disclaimer {
+        font-size: 0.65em; /* Even smaller for mobile */
     }
 }
