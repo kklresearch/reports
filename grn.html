@@ -3,82 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRN Details Submission</title>
-    <link rel="stylesheet" href="style.css"> 
+    <title>Items Movement Registry</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <a href="index.html">
-            <img src="logo.png" alt="KisanKraft Limited Logo" class="header-logo-small">
-        </a>
-        <h1>GRN Details Submission</h1>
+        <img src="logo.png" alt="KisanKraft Limited Logo" class="header-logo-small">
+        <h1>Items Movement Registry</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="daily.html">Daily Report</a></li>
+                <li><a href="weekly.html">Weekly Plan</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <form id="grn-form" 
-              action="https://docs.google.com/forms/d/e/1FAIpQLSeGXkyzIyldgZLbkmk5bybrNgGkd4nti8L0gPdAdxPWBosZLQ/formResponse" 
-              method="POST" 
-              target="google-form-iframe">
+        <form id="grnForm">
+            <div class="form-guidance">
+                Please fill in all details for item movements (receiving or dispatching). All fields are mandatory.
+            </div>
 
-            <label for="transactionType">Transaction Type:</label>
-            <select id="transactionType" name="entry.330592842" required>
-                <option value="">Select Type</option>
-                <option value="Receiving">Receiving</option>
-                <option value="Dispatching">Dispatching</option>
-            </select>
+            <div>
+                <label for="employeeId">Employee ID:</label>
+                <input type="text" id="employeeId" name="employeeId" placeholder="e.g., KKL12345" required>
+            </div>
 
-            <label for="employeeId">Employee ID:</label>
-            <input type="number" id="employeeId" name="entry.1542419140" required>
+            <div>
+                <label for="grnNumber">GRN Number:</label>
+                <input type="text" id="grnNumber" name="grnNumber" placeholder="Enter GRN Number" required>
+            </div>
 
-            <label>Date of Transaction:</label>
-            <div class="date-inputs">
-                <div>
-                    <label for="grn_date_day">Day:</label>
-                    <input type="number" id="grn_date_day" name="entry.1832998449_day" placeholder="DD" min="1" max="31" required>
-                </div>
-                
-                <div>
-                    <label for="grn_date_month">Month:</label>
-                    <input type="number" id="grn_date_month" name="entry.1832998449_month" placeholder="MM" min="1" max="12" required>
-                </div>
-                
-                <div>
-                    <label for="grn_date_year">Year:</label>
-                    <input type="number" id="grn_date_year" name="entry.1832998449_year" placeholder="YYYY" min="1900" max="2100" required>
+            <div>
+                <label for="date">Date:</label>
+                <div class="date-inputs">
+                    <div>
+                        <label for="day">Day:</label>
+                        <input type="number" id="day" name="day" placeholder="DD" min="1" max="31" required>
+                    </div>
+                    <div>
+                        <label for="month">Month:</label>
+                        <input type="number" id="month" name="month" placeholder="MM" min="1" max="12" required>
+                    </div>
+                    <div>
+                        <label for="year">Year:</label>
+                        <input type="number" id="year" name="year" placeholder="YYYY" min="2000" max="2099" required>
+                    </div>
                 </div>
             </div>
 
-            <label for="itemsList">Items List (e.g., Item A - 100 units, Item B - 50 units):</label>
-            <textarea id="itemsList" name="entry.689963996" rows="5" required></textarea>
+            <div>
+                <label for="materialName">Material Name:</label>
+                <input type="text" id="materialName" name="materialName" placeholder="e.g., Seeds A, Fertilizer B" required>
+            </div>
 
-            <label for="fromLocation">From Location:</label>
-            <input type="text" id="fromLocation" name="entry.1161717631" required>
+            <div>
+                <label for="quantity">Quantity (in Kgs/Litres/Units):</label>
+                <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" required>
+            </div>
 
-            <label for="toLocation">To Location:</label>
-            <input type="text" id="toLocation" name="entry.977582924" required>
+            <div>
+                <label for="movementType">Movement Type:</label>
+                <select id="movementType" name="movementType" required>
+                    <option value="">Select Type</option>
+                    <option value="received">Received</option>
+                    <option value="dispatched">Dispatched</option>
+                    <option value="returned">Returned</option>
+                    <option value="transfer">Inter-warehouse Transfer</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="fromLocation">From Location:</label>
+                <input type="text" id="fromLocation" name="fromLocation" placeholder="e.g., Bangalore Warehouse, Supplier X" required>
+            </div>
+
+            <div>
+                <label for="toLocation">To Location:</label>
+                <input type="text" id="toLocation" name="toLocation" placeholder="e.g., Delhi Godown, Farmer Y" required>
+            </div>
+
+            <div>
+                <label for="remarks">Remarks (Optional):</label>
+                <textarea id="remarks" name="remarks" rows="4" placeholder="Any additional notes or comments"></textarea>
+            </div>
 
             <button type="submit">Submit GRN Details</button>
-            <button type="button" id="resetGrnFormBtn" class="reset-btn">Reset Form</button>
+            <button type="reset" class="reset-btn">Reset Form</button>
         </form>
     </main>
 
     <footer>
         <p>&copy; 2025 KisanKraft Limited. All rights reserved.</p>
-        <p class="disclaimer">
-            Disclaimer: This portal is for employees of the Seeds Department of KisanKraft Limited to submit daily work done reports and weekly plans. Submitted data is linked to your Employee ID and stored securely for internal use only. Once submitted, entries cannot be edited or deleted via this portal. Please verify before submitting.
-        </p>
     </footer>
-
-    <iframe name="google-form-iframe" style="display:none;"></iframe>
 
     <div id="confirmationPopup" class="confirmation-popup">
         <div class="confirmation-content">
-            <h2>Success!</h2>
-            <p>Your report has been submitted successfully!</p>
-            <button id="closePopupBtn">OK</button>
+            <h2>Submission Successful!</h2>
+            <p>Your Items Movement details have been recorded.</p>
+            <button id="closePopup">Close</button>
         </div>
     </div>
 
-    <script src="script.js"></script> 
+    <script>
+        document.getElementById('grnForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // In a real application, you would collect form data and send it to a server here.
+            // For this example, we'll just show the confirmation pop-up.
+
+            document.getElementById('confirmationPopup').classList.add('show');
+        });
+
+        document.getElementById('closePopup').addEventListener('click', function() {
+            document.getElementById('confirmationPopup').classList.remove('show');
+            document.getElementById('grnForm').reset(); // Reset form after closing popup
+        });
+    </script>
 </body>
 </html>
