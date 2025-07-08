@@ -16,37 +16,33 @@
 
     <main>
         <form id="weekly-report-form" 
-              action="YOUR_GOOGLE_FORM_ACTION_URL_FOR_WEEKLY_PLAN" 
+              action="https://docs.google.com/forms/d/e/1FAIpQLSc7Q8w6fCfLpbIqVJIcCGJn2iTcWY8KW1m0qgMdCoAtnI1Dzg/formResponse" 
               method="POST" 
               target="google-form-iframe">
 
             <label for="employeeId">Employee ID:</label>
-            <input type="number" id="employeeId" name="entry.1107464652" required> <div id="weeklyPlanEntries">
-                <div class="day-plan-entry" data-day-index="1">
-                    <h3>Day 1 Plan</h3>
-                    <label>Date for Day 1:</label>
-                    <div class="date-inputs">
-                        <div>
-                            <label for="date_day_1">Day:</label>
-                            <input type="number" id="date_day_1" name="entry.DAY1_DATE_DAY_ID" placeholder="DD" min="1" max="31" required>
-                        </div>
-                        
-                        <div>
-                            <label for="date_month_1">Month:</label>
-                            <input type="number" id="date_month_1" name="entry.DAY1_DATE_MONTH_ID" placeholder="MM" min="1" max="12" required>
-                        </div>
-                        
-                        <div>
-                            <label for="date_year_1">Year:</label>
-                            <input type="number" id="date_year_1" name="entry.DAY1_DATE_YEAR_ID" placeholder="YYYY" min="1900" max="2100" required>
-                        </div>
-                    </div>
-                    <label for="plan_day_1">Plan for Day 1:</label>
-                    <textarea id="plan_day_1" name="entry.PLAN_DAY1_ID" rows="5" required></textarea>
+            <input type="number" id="employeeId" name="entry.1107464652" required>
+
+            <label>Date of Plan Submission:</label>
+            <div class="date-inputs">
+                <div>
+                    <label for="date_day">Day:</label>
+                    <input type="number" id="date_day" name="entry.1121565543_day" placeholder="DD" min="1" max="31" required>
+                </div>
+                
+                <div>
+                    <label for="date_month">Month:</label>
+                    <input type="number" id="date_month" name="entry.1121565543_month" placeholder="MM" min="1" max="12" required>
+                </div>
+                
+                <div>
+                    <label for="date_year">Year:</label>
+                    <input type="number" id="date_year" name="entry.1121565543_year" placeholder="YYYY" min="1900" max="2100" required>
                 </div>
             </div>
 
-            <button type="button" id="addDayPlanBtn" class="add-remove-btn">Add Day</button>
+            <label for="plan">Weekly Plan (Single Entry):</label>
+            <textarea id="plan" name="entry.1252353547" rows="5" required></textarea>
 
             <button type="submit">Submit Weekly Plan</button>
             <button type="button" id="resetWeeklyFormBtn" class="reset-btn">Reset Form</button>
@@ -65,7 +61,7 @@
     <div id="confirmationPopup" class="confirmation-popup">
         <div class="confirmation-content">
             <h2>Success!</h2>
-            <p>Your report has been submitted and saved to the Google Sheet.</p>
+            <p>Your report has been submitted successfully!</p>
             <button id="closePopupBtn">OK</button>
         </div>
     </div>
