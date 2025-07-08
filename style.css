@@ -9,9 +9,9 @@
     --text-light: #666; /* Lighter text */
     --shadow-light: rgba(0, 0, 0, 0.08);
 
-    /* New colors for the landing page */
-    --hero-bg-dark: #2c3e50; /* Dark blue/grey for hero section */
-    --hero-text-light: #ecf0f1; /* Light text for hero section */
+    /* Colors for landing page & general headers */
+    --hero-bg-dark: #2c3e50; /* Dark blue/grey for hero section and general headers */
+    --hero-text-light: #ecf0f1; /* Light text on dark background */
     --gradient-start: #3498db; /* A blue */
     --gradient-end: #8e44ad;   /* A purple */
 }
@@ -33,38 +33,45 @@ body {
     padding: 0; /* Remove overall padding, sections will handle it */
 }
 
-/* Header (General styles for daily/weekly reports) */
+/* General Header (Applies to daily/weekly report pages by default) */
 header {
-    background-color: var(--background-white);
+    background-color: var(--hero-bg-dark); /* Dark background for logo visibility */
+    color: var(--hero-text-light); /* Light text on dark background */
     padding: 20px 30px;
     border-radius: 0 0 8px 8px; /* Rounded bottom corners */
     box-shadow: 0 4px 8px var(--shadow-light);
     margin-bottom: 30px;
     text-align: center;
-    color: var(--secondary-color); /* Default text color for non-index headers */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack logo and title */
+    align-items: center; /* Center items horizontally */
+    justify-content: center;
 }
 
+/* Title in Header (General) */
 header h1 {
-    color: var(--primary-color);
+    color: var(--hero-text-light); /* Ensure text is light on dark header */
     margin-bottom: 10px;
     font-size: 2.5em;
     font-weight: 600;
 }
 
+/* Logo in general header (for daily/weekly pages) */
+.header-logo-small {
+    max-width: 150px; /* Smaller size for report pages */
+    height: auto;
+    margin-bottom: 10px; /* Space between logo and title */
+}
+
 /* --- Specific Styles for the Index Page Header (Hero Section) --- */
 .index-hero {
-    background: var(--hero-bg-dark); /* Dark background for logo visibility */
-    color: var(--hero-text-light); /* Light text on dark background */
+    /* These properties will override the general 'header' properties for the index page */
     padding: 60px 20px; /* More padding for a hero feel */
-    text-align: center;
     border-radius: 0; /* No rounded corners for the hero section */
     box-shadow: none; /* Remove shadow if it clashes with hero look */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     min-height: 40vh; /* Make it take up more vertical space */
-    position: relative; /* For potential background elements */
+    position: relative;
+    /* Other flexbox properties are inherited from 'header' and apply well */
 }
 
 .index-hero::before { /* Subtle overlay for texture/depth */
@@ -76,9 +83,7 @@ header h1 {
 }
 
 .index-hero h1 {
-    color: var(--hero-text-light); /* Override default h1 color */
     font-size: 3.2em; /* Larger for impact */
-    margin-bottom: 15px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Subtle text shadow */
     z-index: 1; /* Bring text above overlay */
 }
@@ -91,15 +96,15 @@ header h1 {
     z-index: 1;
 }
 
-/* Logo in Header */
+/* Logo in Hero Header (for index page) */
 .hero-logo {
-    max-width: 250px; /* Size for the logo */
+    max-width: 250px; /* Larger size for the hero logo */
     height: auto;
     margin-bottom: 25px;
     z-index: 1;
 }
 
-/* Main Navigation (General, applies to daily/weekly) */
+/* Main Navigation (General) */
 nav ul {
     list-style: none;
     padding: 0;
@@ -126,7 +131,6 @@ nav a {
 .index-hero nav.main-nav ul {
     gap: 20px; /* Adjust gap for main nav links */
     flex-wrap: wrap; /* Allow links to wrap on smaller screens */
-    /* Ensure items stack on small screens */
     flex-direction: row; /* Default for larger screens */
 }
 
@@ -139,9 +143,8 @@ nav a {
     font-weight: 600;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    /* Added to ensure links don't get too wide on small screens */
-    display: inline-block; /* Behave like a block, but allow other items on same line */
-    min-width: 200px; /* Ensure a minimum width */
+    display: inline-block;
+    min-width: 200px;
     text-align: center;
 }
 
@@ -218,6 +221,7 @@ form textarea {
     margin-bottom: 0;
     flex-basis: auto;
     white-space: nowrap;
+    font-weight: normal; /* Labels inside date-inputs can be less bold */
 }
 
 .date-inputs input {
@@ -254,17 +258,17 @@ button[type="submit"]:active {
 /* Footer */
 footer {
     text-align: center;
-    padding: 25px 20px; /* Increased padding */
-    color: var(--hero-text-light); /* Lighter text for footer on gradient background */
+    padding: 25px 20px;
+    color: var(--hero-text-light);
     font-size: 0.9em;
-    margin-top: auto; /* Push footer to the bottom */
-    background: rgba(0,0,0,0.2); /* Slight dark background for readability */
+    margin-top: auto;
+    background: rgba(0,0,0,0.2);
 }
 
 .disclaimer {
-    font-size: 0.75em; /* Smaller font for disclaimer */
-    color: rgba(255, 255, 255, 0.8); /* Slightly faded white */
-    margin-top: 15px; /* Space above disclaimer */
+    font-size: 0.75em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 15px;
     line-height: 1.4;
     max-width: 800px;
     margin-left: auto;
@@ -272,16 +276,16 @@ footer {
 }
 
 
-/* Confirmation Pop-up Styling (No change from previous) */
+/* Confirmation Pop-up Styling */
 .confirmation-popup {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
-    backdrop-filter: blur(5px); /* Blurred background */
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
     z-index: 1000;
     justify-content: center;
     align-items: center;
@@ -342,9 +346,9 @@ footer {
 /* --- Responsive adjustments --- */
 @media (max-width: 768px) {
     body {
-        padding: 0; /* Sections will manage padding */
+        padding: 0;
     }
-    header, .index-hero { /* Apply to both general header and hero */
+    header, .index-hero {
         padding: 30px 15px;
     }
     header h1, .index-hero h1 {
@@ -354,24 +358,23 @@ footer {
         font-size: 1em;
         margin-bottom: 20px;
     }
-    /* Adjusted nav for index page on smaller screens */
+    /* Index page nav adjustments */
     .index-hero nav.main-nav ul {
-        flex-direction: column; /* Stack links vertically */
-        gap: 15px; /* Space between stacked links */
-    }
-    .index-hero nav.main-nav a {
-        width: 80%; /* Make links take more width */
-        max-width: 300px; /* Limit max width */
-        margin: 0 auto; /* Center links */
-        display: block; /* Ensure they take full width for centering */
-    }
-    /* End of index-hero nav adjustments */
-
-    nav ul { /* General nav, mostly for daily/weekly */
         flex-direction: column;
         gap: 15px;
     }
-    nav a { /* General nav, mostly for daily/weekly */
+    .index-hero nav.main-nav a {
+        width: 80%;
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
+    /* General nav (for daily/weekly pages) adjustments */
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav a {
         padding: 10px 20px;
         display: block;
     }
@@ -408,7 +411,7 @@ footer {
     }
     .date-inputs input {
         width: 100%;
-        max-width: 100px; /* Allow full width up to max */
+        max-width: 100px;
     }
     .disclaimer {
         font-size: 0.7em;
