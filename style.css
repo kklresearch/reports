@@ -212,33 +212,41 @@ form textarea {
 /* Date Inputs Specific Styling */
 .date-inputs {
     display: flex;
-    gap: 10px; /* Default gap */
+    flex-direction: column; /* CRITICAL: Stack items vertically */
+    gap: 10px; /* Space between stacked date components */
+    align-items: flex-start; /* Align labels/inputs to the start */
+    padding-bottom: 10px; /* Add some space below the date section */
+}
+
+.date-inputs > div { /* A new wrapper div for each label-input pair */
+    display: flex;
     align-items: center;
-    flex-wrap: nowrap; /* CRITICAL: Prevent wrapping by default */
-    justify-content: space-between; /* Distribute space */
+    gap: 10px; /* Space between label and input */
+    width: 100%; /* Take full width of its parent (.date-inputs) */
+    max-width: 250px; /* Limit overall width of a date component for better form alignment */
 }
 
 .date-inputs label {
     margin-bottom: 0;
     flex-shrink: 0; /* Prevent labels from shrinking */
     white-space: nowrap; /* Keep labels on one line */
-    font-weight: normal;
+    font-weight: normal; /* Less bold than main form labels */
+    flex-basis: 60px; /* Give labels a fixed base width for alignment */
 }
 
 .date-inputs input {
-    flex-grow: 1; /* Allow inputs to grow if space permits */
-    flex-shrink: 1; /* Allow inputs to shrink if needed */
-    min-width: 40px; /* Smallest they can get */
-    max-width: 70px; /* Max width for individual inputs (Day/Month) */
+    flex-grow: 1; /* Allow input to take remaining space */
+    flex-shrink: 1; /* Allow input to shrink */
+    max-width: 100px; /* Maximum reasonable width for the date input */
     text-align: center;
-    padding: 8px; /* Slightly reduced padding for compactness */
-    font-size: 0.95em; /* Slightly reduced font size for compactness */
-    box-sizing: border-box; /* Ensure padding/border are included in width */
+    padding: 8px;
+    font-size: 0.95em;
+    box-sizing: border-box;
 }
 
-/* Specific styling for the Year input to allow more width */
+/* Specific styling for the Year input, allow it to be a bit wider */
 .date-inputs input[placeholder="YYYY"] {
-    max-width: 90px; /* Allow year to be a bit wider */
+    max-width: 120px; /* Allow year input to be slightly wider */
 }
 
 /* Submit Button */
@@ -420,21 +428,20 @@ footer {
     form {
         padding: 15px;
     }
-    /* Date inputs specifically for very small screens */
-    .date-inputs {
-        gap: 5px; /* Reduce gap further */
+    /* Date inputs specific adjustments for very small screens */
+    .date-inputs > div {
+        max-width: 200px; /* Tighter max-width for each date component */
     }
     .date-inputs label {
-        font-size: 0.8em; /* Even smaller labels */
+        font-size: 0.85em; /* Slightly smaller label font */
+        flex-basis: 50px; /* Slightly reduce label base width */
     }
     .date-inputs input {
-        padding: 5px; /* Even smaller padding */
-        font-size: 0.8em; /* Even smaller input font */
-        min-width: 35px; /* Allow shrinking more */
-        max-width: 50px; /* Tighten max-width for Day/Month */
+        padding: 6px;
+        font-size: 0.85em;
     }
     .date-inputs input[placeholder="YYYY"] {
-        max-width: 70px; /* Tighten max-width for Year */
+        max-width: 100px; /* Allow year to be a bit wider */
     }
     .disclaimer {
         font-size: 0.7em;
