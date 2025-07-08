@@ -315,24 +315,92 @@ button[type="submit"]:active {
 footer {
     text-align: center;
     padding: 25px 20px;
-    color: var(--hero-text-light);
+    color: var(--hero-text-light); /* Kept for general dark background, will override for index */
     font-size: 0.9em;
     margin-top: auto;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2); /* Kept for general dark background, will override for index */
 }
 
-.disclaimer {
+/* Specific footer style for index.html (only copyright statement) */
+.index-hero + main + footer { /* Selects footer after main which is after index-hero header */
+    background: none; /* No background for this footer */
+    color: var(--hero-text-light); /* Keep text light on body gradient */
+    box-shadow: none;
+    padding-top: 20px; /* Adjust padding if needed */
+    padding-bottom: 20px;
+}
+
+.index-hero + main + footer p {
+    color: rgba(255, 255, 255, 0.9); /* Ensure copyright text is light and visible */
+    font-size: 0.95em;
+    margin-bottom: 0; /* Remove extra margin if any */
+}
+
+
+/* Disclaimer in Header (new position) */
+.header-disclaimer {
     font-size: 0.75em;
     color: rgba(255, 255, 255, 0.8);
-    margin-top: 15px;
+    margin-top: 25px; /* Space it from the nav links */
     line-height: 1.4;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    z-index: 1; /* Ensure it's above the overlay */
 }
 
 
-/* Confirmation Pop-up Styling */
+/* GRN Section in Main Content (the "light box") */
+.grn-section {
+    background-color: var(--background-white);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px var(--shadow-light);
+    width: 100%;
+    max-width: 550px; /* Same max-width as forms for consistency */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content within the box */
+    gap: 15px; /* Space between elements in the box */
+    margin-top: 30px; /* Space from the header */
+    margin-bottom: 30px; /* Space from the footer */
+    text-align: center; /* Center text */
+}
+
+.grn-section h2 {
+    color: var(--secondary-color);
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.grn-section p {
+    color: var(--text-light);
+    font-size: 1.05em;
+    margin-bottom: 15px;
+}
+
+.grn-link-button {
+    background-color: var(--primary-color);
+    color: var(--background-white);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-decoration: none; /* Remove underline from link */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.grn-link-button:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+
+/* Confirmation Pop-up Styling (unchanged, but included for completeness) */
 .confirmation-popup {
     display: none;
     position: fixed;
@@ -450,6 +518,23 @@ footer {
         padding: 10px;
         font-size: 0.9em;
     }
+
+    /* Responsive for GRN Section */
+    .grn-section {
+        padding: 25px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .grn-section h2 {
+        font-size: 1.8em;
+    }
+    .grn-section p {
+        font-size: 0.95em;
+    }
+    .grn-link-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
 }
 
 @media (max-width: 480px) {
@@ -486,5 +571,16 @@ footer {
     }
     .disclaimer {
         font-size: 0.7em;
+    }
+
+    /* Responsive for GRN Section */
+    .grn-section {
+        padding: 20px;
+    }
+    .grn-section h2 {
+        font-size: 1.6em;
+    }
+    .grn-section p {
+        font-size: 0.9em;
     }
 }
