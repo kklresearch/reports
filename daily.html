@@ -8,8 +8,9 @@
 </head>
 <body>
     <header>
-        <h1>Daily Report</h1>
-        </header>
+        <img src="logo.png" alt="KisanKraft Limited Logo" class="header-logo-small">
+        <h1>Daily Work Done Report</h1>
+    </header>
 
     <main>
         <form id="daily-report-form" 
@@ -18,39 +19,36 @@
               target="google-form-iframe">
 
             <label for="employeeId">Employee ID:</label>
-            <input type="text" id="employeeId" name="entry.1107464652" required>
+            <input type="number" id="employeeId" name="entry.1107464652" required>
 
-            <label for="workDone">Work Done:</label>
-            <textarea id="workDone" name="entry.1252353547" rows="5" required></textarea>
-
-            <label>Date:</label>
+            <label>Date of Work Done:</label>
             <div class="date-inputs">
-                <label for="date_month">Month:</label>
-                <input type="number" id="date_month" name="entry.1121565543_month" placeholder="MM" min="1" max="12" required style="width: 60px;">
-                
                 <label for="date_day">Day:</label>
                 <input type="number" id="date_day" name="entry.1121565543_day" placeholder="DD" min="1" max="31" required style="width: 60px;">
+                
+                <label for="date_month">Month:</label>
+                <input type="number" id="date_month" name="entry.1121565543_month" placeholder="MM" min="1" max="12" required style="width: 60px;">
                 
                 <label for="date_year">Year:</label>
                 <input type="number" id="date_year" name="entry.1121565543_year" placeholder="YYYY" min="1900" max="2100" required style="width: 80px;">
             </div>
+
+            <label for="workDone">Work Done:</label>
+            <textarea id="workDone" name="entry.1252353547" rows="5" required></textarea>
 
             <button type="submit">Submit Daily Report</button>
         </form>
     </main>
 
     <footer>
-        </footer>
+        <p>&copy; 2025 KisanKraft Limited. All rights reserved.</p>
+        <p class="disclaimer">
+            Disclaimer: This portal is for employees of the Seeds Department of KisanKraft Limited to submit daily work done reports and weekly plans. Submitted data is linked to your Employee ID and stored securely for internal use only. Once submitted, entries cannot be edited or deleted via this portal. Please verify before submitting.
+        </p>
+    </footer>
 
     <iframe name="google-form-iframe" style="display:none;"></iframe>
-<div id="confirmationPopup" class="confirmation-popup">
-    <div class="confirmation-content">
-        <h2>Success!</h2>
-        <p>Your report has been submitted and saved to the Google Sheet.</p>
-        <button id="closePopupBtn">OK</button>
-    </div>
-</div>
 
-<script src="script.js"></script>
-    </body>
+    <script src="script.js"></script> 
+</body>
 </html>
