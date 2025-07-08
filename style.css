@@ -212,22 +212,33 @@ form textarea {
 /* Date Inputs Specific Styling */
 .date-inputs {
     display: flex;
-    gap: 10px;
+    gap: 10px; /* Default gap */
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* CRITICAL: Prevent wrapping by default */
+    justify-content: space-between; /* Distribute space */
 }
 
 .date-inputs label {
     margin-bottom: 0;
-    flex-basis: auto;
-    white-space: nowrap;
-    font-weight: normal; /* Labels inside date-inputs can be less bold */
+    flex-shrink: 0; /* Prevent labels from shrinking */
+    white-space: nowrap; /* Keep labels on one line */
+    font-weight: normal;
 }
 
 .date-inputs input {
-    flex-grow: 1;
-    max-width: 80px;
+    flex-grow: 1; /* Allow inputs to grow if space permits */
+    flex-shrink: 1; /* Allow inputs to shrink if needed */
+    min-width: 40px; /* Smallest they can get */
+    max-width: 70px; /* Max width for individual inputs (Day/Month) */
     text-align: center;
+    padding: 8px; /* Slightly reduced padding for compactness */
+    font-size: 0.95em; /* Slightly reduced font size for compactness */
+    box-sizing: border-box; /* Ensure padding/border are included in width */
+}
+
+/* Specific styling for the Year input to allow more width */
+.date-inputs input[placeholder="YYYY"] {
+    max-width: 90px; /* Allow year to be a bit wider */
 }
 
 /* Submit Button */
@@ -409,9 +420,21 @@ footer {
     form {
         padding: 15px;
     }
+    /* Date inputs specifically for very small screens */
+    .date-inputs {
+        gap: 5px; /* Reduce gap further */
+    }
+    .date-inputs label {
+        font-size: 0.8em; /* Even smaller labels */
+    }
     .date-inputs input {
-        width: 100%;
-        max-width: 100px;
+        padding: 5px; /* Even smaller padding */
+        font-size: 0.8em; /* Even smaller input font */
+        min-width: 35px; /* Allow shrinking more */
+        max-width: 50px; /* Tighten max-width for Day/Month */
+    }
+    .date-inputs input[placeholder="YYYY"] {
+        max-width: 70px; /* Tighten max-width for Year */
     }
     .disclaimer {
         font-size: 0.7em;
