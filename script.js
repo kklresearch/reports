@@ -4,20 +4,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Selectors for forms and popup
     const dailyForm = document.getElementById('daily-report-form');
     const weeklyForm = document.getElementById('weekly-report-form');
+    const grnForm = document.getElementById('grn-form'); // New selector for GRN form
     const confirmationPopup = document.getElementById('confirmationPopup');
     const closePopupBtn = document.getElementById('closePopupBtn');
 
     // Selectors for reset buttons
     const resetDailyFormBtn = document.getElementById('resetDailyFormBtn');
     const resetWeeklyFormBtn = document.getElementById('resetWeeklyFormBtn');
+    const resetGrnFormBtn = document.getElementById('resetGrnFormBtn'); // New selector for GRN reset button
 
     // Verify if elements are found (for debugging purposes)
     console.log("Daily Form found:", !!dailyForm);
     console.log("Weekly Form found:", !!weeklyForm);
+    console.log("GRN Form found:", !!grnForm); // Log GRN form
     console.log("Confirmation Popup found:", !!confirmationPopup);
     console.log("Close Popup Button found:", !!closePopupBtn);
     console.log("Reset Daily Button found:", !!resetDailyFormBtn);
     console.log("Reset Weekly Button found:", !!resetWeeklyFormBtn);
+    console.log("Reset GRN Button found:", !!resetGrnFormBtn); // Log GRN reset button
 
 
     // --- Pop-up Functions ---
@@ -64,6 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
         weeklyForm.addEventListener('submit', handleFormSubmission(weeklyForm));
     }
 
+    if (grnForm) { // New event listener for GRN form
+        grnForm.addEventListener('submit', handleFormSubmission(grnForm));
+    }
+
 
     // --- Reset Button Handlers ---
     if (resetDailyFormBtn && dailyForm) {
@@ -77,6 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
         resetWeeklyFormBtn.addEventListener('click', () => {
             weeklyForm.reset();
             console.log("Weekly Form explicitly reset by button.");
+        });
+    }
+
+    if (resetGrnFormBtn && grnForm) { // New reset button handler for GRN form
+        resetGrnFormBtn.addEventListener('click', () => {
+            grnForm.reset();
+            console.log("GRN Form explicitly reset by button.");
         });
     }
 
