@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRN Details Submission</title>
-    <link rel="stylesheet" href="style.css"> 
+    <title>Items Movement Registry</title> <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
     <header>
-        <a href="index.html">
+        <a href="original_index.html">
             <img src="logo.png" alt="KisanKraft Limited Logo" class="header-logo-small">
         </a>
-        <h1>GRN Details Submission</h1>
-    </header>
+        <h1>Items Movement Registry</h1> </header>
 
     <main>
         <form id="grn-form" 
               action="https://docs.google.com/forms/d/e/1FAIpQLSeGXkyzIyldgZLbkmk5bybrNgGkd4nti8L0gPdAdxPWBosZLQ/formResponse" 
               method="POST" 
               target="google-form-iframe">
+
+            <div class="form-guidance">
+                Please fill in all details for item movements (receiving or dispatching). All fields are mandatory.
+            </div>
 
             <label for="transactionType">Transaction Type:</label>
             <select id="transactionType" name="entry.330592842" required>
@@ -29,6 +31,9 @@
 
             <label for="employeeId">Employee ID:</label>
             <input type="number" id="employeeId" name="entry.1542419140" required>
+
+            <label for="grnNumber">GRN Number:</label>
+            <input type="text" id="grnNumber" name="entry.1346210815" placeholder="Enter GRN Number" required>
 
             <label>Date of Transaction:</label>
             <div class="date-inputs">
