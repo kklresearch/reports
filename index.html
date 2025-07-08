@@ -3,109 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Under Maintenance</title>
+    <title>KKL Seeds Reports Portal</title>
     <link rel="stylesheet" href="style.css"> 
-    <style>
-        /* Specific styles for the maintenance page to override/adjust general styles */
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Ensure it takes full viewport height */
-            text-align: center;
-            padding: 20px;
-        }
-
-        .maintenance-container {
-            background-color: var(--background-white);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 6px 12px var(--shadow-light);
-            max-width: 600px;
-            width: 100%;
-            margin: auto; /* Center the container */
-        }
-
-        .maintenance-container img {
-            max-width: 180px; /* Adjust logo size for maintenance page */
-            height: auto;
-            margin-bottom: 25px;
-        }
-
-        .maintenance-container h1 {
-            font-size: 2.2em;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .maintenance-container p {
-            font-size: 1.1em;
-            color: var(--secondary-color);
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        footer {
-            margin-top: 40px; /* Push footer down */
-            background: none; /* Remove background for maintenance footer */
-            color: var(--hero-text-light); /* Keep text light on body gradient */
-        }
-
-        .disclaimer {
-            color: rgba(255, 255, 255, 0.7); /* Slightly lighter disclaimer text */
-        }
-
-        /* Responsive adjustments for maintenance page */
-        @media (max-width: 768px) {
-            .maintenance-container {
-                padding: 30px;
-            }
-            .maintenance-container h1 {
-                font-size: 1.8em;
-            }
-            .maintenance-container p {
-                font-size: 1em;
-            }
-            .maintenance-container img {
-                max-width: 150px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .maintenance-container {
-                padding: 20px;
-            }
-            .maintenance-container h1 {
-                font-size: 1.5em;
-            }
-            .maintenance-container p {
-                font-size: 0.9em;
-            }
-            .maintenance-container img {
-                max-width: 120px;
-            }
-        }
-    </style>
 </head>
 <body>
-    <main class="maintenance-container">
-        <img src="logo.png" alt="KisanKraft Limited Logo">
-        <h1>Pardon Our Appearance!</h1>
-        <p>
-            Our portal is currently undergoing essential maintenance and improvements to enhance your experience. 
-            We apologize for any inconvenience this may cause.
+    <header class="index-hero"> 
+        <img src="logo.png" alt="KisanKraft Limited Logo" class="hero-logo">
+        <h1>Welcome to KKL Seeds Reports Portal</h1>
+        <p>This portal is designed to help employees of the Seeds Department easily submit their daily work reports and weekly plans.</p> 
+        <nav class="main-nav"> 
+            <ul>
+                <li><a href="daily.html">Submit Daily Report</a></li>
+                <li><a href="weekly.html">Submit Weekly Plan</a></li>
+            </ul>
+        </nav>
+        <p class="disclaimer header-disclaimer"> 
+            Disclaimer: This portal is for employees of the Seeds Department of KisanKraft Limited to submit daily work done reports and weekly plans. Submitted data is linked to your Employee ID and stored securely for internal use only. Once submitted, entries cannot be edited or deleted via this portal. Please verify before submitting.
         </p>
-        <p>
-            We appreciate your patience and will be back online shortly.
-        </p>
+    </header>
+
+    <main>
+        <section class="grn-section">
+            <h2>Items Movement Registry</h2>
+            <p>Submit details for movements of items (receiving or dispatching).</p>
+            <a href="grn.html" class="grn-link-button">Submit Items Movement Details</a>
+            <p class="grn-disclaimer">
+                Note: Entries made once to this portal cannot be changed. Please verify before submitting.
+            </p>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2025 KisanKraft Limited. All rights reserved.</p>
-        <p class="disclaimer">
-            Disclaimer: This portal is for employees of the Seeds Department of KisanKraft Limited to submit daily work done reports and weekly plans. Submitted data is linked to your Employee ID and stored securely for internal use only. Once submitted, entries cannot be edited or deleted via this portal. Please verify before submitting.
-        </p>
     </footer>
 </body>
 </html>
