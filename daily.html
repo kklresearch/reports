@@ -8,7 +8,9 @@
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="KisanKraft Limited Logo" class="header-logo-small">
+        <a href="index.html">
+            <img src="logo.png" alt="KisanKraft Limited Logo" class="header-logo-small">
+        </a>
         <h1>Daily Work Done Report</h1>
     </header>
 
@@ -43,6 +45,7 @@
             <textarea id="workDone" name="entry.1252353547" rows="5" required></textarea>
 
             <button type="submit">Submit Daily Report</button>
+            <button type="button" id="resetDailyFormBtn" class="reset-btn">Reset Form</button>
         </form>
     </main>
 
@@ -58,7 +61,7 @@
     <div id="confirmationPopup" class="confirmation-popup">
         <div class="confirmation-content">
             <h2>Success!</h2>
-            <p>Your report has been submitted successfully!</p>
+            <p>Your report has been submitted and saved to the Google Sheet.</p>
             <button id="closePopupBtn">OK</button>
         </div>
     </div>
