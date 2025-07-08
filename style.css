@@ -341,7 +341,7 @@ footer {
 
 /* Disclaimer in Header (font size explicitly reduced) */
 .header-disclaimer {
-    font-size: 0.65em; /* Further reduced font size */
+    font-size: 0.65em; /* Significantly reduced font size */
     color: rgba(255, 255, 255, 0.7); /* Slightly softer white */
     margin-top: 25px; /* Space it from the nav links */
     line-height: 1.4;
@@ -384,7 +384,7 @@ footer {
 
 /* New disclaimer inside GRN box (font size explicitly reduced) */
 .grn-disclaimer {
-    font-size: 0.6em; /* Reduced font size even further for this note */
+    font-size: 0.6em; /* Even smaller font size for this note */
     color: rgba(255, 255, 255, 0.6); /* Even softer white for this disclaimer */
     margin-top: 15px; /* Space from the button */
     line-height: 1.4;
@@ -587,10 +587,10 @@ footer {
     .date-inputs input[placeholder="YYYY"] {
         max-width: 100px; /* Allow year to be a bit wider */
     }
-    .disclaimer { /* This is a general class, might not be specific enough for .header-disclaimer */
-        font-size: 0.65em; /* Ensures a baseline for any element with 'disclaimer' */
+    /* IMPORTANT: Ensure these are specific if general '.disclaimer' exists */
+    .header-disclaimer { 
+        font-size: 0.6em; /* Even smaller for very small screens */
     }
-
     /* Responsive for GRN Section */
     .grn-section {
         padding: 20px;
@@ -602,6 +602,6 @@ footer {
         font-size: 0.9em;
     }
     .grn-disclaimer {
-        font-size: 0.6em; /* Ensures this specific disclaimer is very small */
+        font-size: 0.55em; /* Smallest font for this specific note on mobile */
     }
 }
