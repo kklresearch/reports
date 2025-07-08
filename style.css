@@ -339,9 +339,9 @@ footer {
 }
 
 
-/* Disclaimer in Header (font size explicitly reduced) */
+/* Disclaimer in Header (font size explicitly reduced with !important) */
 .header-disclaimer {
-    font-size: 0.65em; /* Significantly reduced font size */
+    font-size: 0.65em !important; /* Force this font size */
     color: rgba(255, 255, 255, 0.7); /* Slightly softer white */
     margin-top: 25px; /* Space it from the nav links */
     line-height: 1.4;
@@ -354,11 +354,11 @@ footer {
 
 /* GRN Section in Main Content (now a transparent section, not a white box) */
 .grn-section {
-    background-color: transparent; /* Make it transparent to show body gradient */
+    background-color: transparent !important; /* Force transparent background */
     color: var(--hero-text-light); /* Light text for readability on dark gradient */
     padding: 40px; /* Keep internal padding for content spacing */
-    border-radius: 0; /* No rounded corners */
-    box-shadow: none; /* No shadow */
+    border-radius: 0 !important; /* Force no rounded corners */
+    box-shadow: none !important; /* Force no shadow */
     width: 100%;
     max-width: 550px; 
     display: flex;
@@ -382,9 +382,9 @@ footer {
     margin-bottom: 15px;
 }
 
-/* New disclaimer inside GRN box (font size explicitly reduced) */
+/* New disclaimer inside GRN box (font size explicitly reduced with !important) */
 .grn-disclaimer {
-    font-size: 0.6em; /* Even smaller font size for this note */
+    font-size: 0.6em !important; /* Force this font size */
     color: rgba(255, 255, 255, 0.6); /* Even softer white for this disclaimer */
     margin-top: 15px; /* Space from the button */
     line-height: 1.4;
@@ -589,7 +589,7 @@ footer {
     }
     /* IMPORTANT: Ensure these are specific if general '.disclaimer' exists */
     .header-disclaimer { 
-        font-size: 0.6em; /* Even smaller for very small screens */
+        font-size: 0.6em !important; /* Even smaller for very small screens, forced */
     }
     /* Responsive for GRN Section */
     .grn-section {
@@ -602,6 +602,6 @@ footer {
         font-size: 0.9em;
     }
     .grn-disclaimer {
-        font-size: 0.55em; /* Smallest font for this specific note on mobile */
+        font-size: 0.55em !important; /* Smallest font for this specific note on mobile, forced */
     }
 }
